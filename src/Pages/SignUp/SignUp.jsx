@@ -1,78 +1,65 @@
-// SignUp.jsx
-import '../LogIn/LogIn.css'; // Reuse the styles from LogIn.css
+
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../CreateAccount/CreateAccount.css';
+import CreateAccount from '../CreateAccount/CreateAccount'
 
 const SignUp = ({ onClose }) => {
+  const navigate = useNavigate();
+  const [showRegistration, setShowRegistration] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+ 
+
   const handleSignUp = () => {
-    console.log('Signing up...');
+    // Perform sign-up logic here...
+    navigate('/SignUp/CreateAccount');
+
+    // Once sign-up is successful, show the CreateAccount
+    setShowRegistration(true);
   };
 
   return (
     <div>
-      <div>
-        <h2>Sign Up</h2>
-        <form>
-          <label htmlFor="username">Username:</label>
-          <input type="text" id="username" placeholder="Enter your username" />
+      
+      {showRegistration ? (
+        <CreateAccount onClose={() => setShowRegistration(false)} />
+      ) : (
+        <div>
+          <h2>Sign Up</h2>
+          <form>
+            <label htmlFor="username">Username:</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
 
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-          />
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
 
-          {/* Add more sign-up form elements as needed */}
+            {/* Add more sign-up form elements as needed */}
 
-          <button className="SignUpButton" type="button" onClick={onClose}>
-            Close
-          </button>
-          <button type="button" onClick={handleSignUp}>
-            Submit
-          </button>
-        </form>
-      </div>
+            <button className="SignUpButton" type="button" onClick={onClose}>
+              Close
+            </button>
+            <button type="button" onClick={handleSignUp}>
+              Submit
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
 
 export default SignUp;
-
-// // SignUp.jsx
-// import '../LogIn/LogIn.css'; // Reuse the styles from LogIn.css
-
-// const SignUp = ({ onClose }) => {
-//   const handleSignUp = () => {
-//     console.log('Signing up...');
-//   };
-
-//   return (
-//     <div >
-//       <div >
-//         <form>
-//           <label htmlFor="username">Username:</label>
-//           <input type="text" id="username" placeholder="Enter your username" />
-
-//           <label htmlFor="password">Password:</label>
-//           <input
-//             type="password"
-//             id="password"
-//             placeholder="Enter your password"
-//           />
-
-//           {/* Add more sign-up form elements as needed */}
-
-//           <div className="button-container">
-//             <button type="button" onClick={handleSignUp}>
-//               Submit
-//             </button>
-//             <button type="button" onClick={onClose}>
-//               Close
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SignUp;

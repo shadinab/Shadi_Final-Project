@@ -2,9 +2,11 @@
 // LogIn.// LogIn.jsx
 import { useState } from 'react';
 import SignUp from '../SignUp/SignUp';
+import { useNavigate } from 'react-router-dom';
 import './LogIn.css';
 
 const LogIn = () => {
+   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showSignUp, setShowSignUp] = useState(false);
@@ -15,6 +17,7 @@ const LogIn = () => {
   };
 
   const handleSignUp = () => {
+    navigate('/SignUp');
     setShowSignUp(true);
     setShowLoginForm(false);
   };
