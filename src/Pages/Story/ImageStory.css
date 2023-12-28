@@ -1,0 +1,32 @@
+/* Default styles */
+
+.image-story {
+  display: flex;
+  overflow-x: scroll;
+  padding: 10px;
+    justify-content: center; /* Center the flex items horizontally */
+margin-bottom: ;
+}
+
+.story-image {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Responsive styles */
+
+
+@media screen and (max-width: 480px) {
+  .image-story {
+    padding: 5px;
+  }
+
+  .story-image {
+    width: 80px;
+    height: 80px;
+    margin-right: 5px;
+  }
+}

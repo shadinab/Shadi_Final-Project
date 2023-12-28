@@ -1,0 +1,40 @@
+.user-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10px; /* Reduce the margin between rows */
+}
+
+.user-picture {
+  width: 190px; /* Increase the width of the images */
+  height: 190px; /* Increase the height of the images */
+  margin: 0 5px; /* Remove the margin between images */
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .user-picture {
+    width: 120px; /* Adjust width for smaller screens */
+    height: 120px; /* Adjust height for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .user-picture {
+    width: 120px; /* Further adjust width for even smaller screens */
+    height: 120px; /* Further adjust height for even smaller screens */
+  }
+}
+
+
+
+
