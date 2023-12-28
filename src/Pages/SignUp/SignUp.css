@@ -1,0 +1,16 @@
+/* Login.css */
+.SignUpContainer{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #d6d1d1;
+}
+
+.SignUpBox{
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 40px; /* Adjust the padding value to make it bigger */
+  border-radius: 8px;
+
+}

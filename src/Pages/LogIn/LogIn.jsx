@@ -13,6 +13,7 @@ const LogIn = () => {
   const [showLoginForm, setShowLoginForm] = useState(true);
 
   const handleLogin = () => {
+    navigate('/');
     console.log('Logging in with:', { username, password });
   };
 
