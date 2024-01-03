@@ -1,136 +1,150 @@
-// UserGrid.jsx
+
+
+
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './UserGrid.css';
+import { useLocation } from 'react-router-dom';
 import UserProfile from './UserProfile';
 
 const UserGrid = () => {
-  const users = [
-    {
-      id: 1,
-      name: 'User 1',
-      avatar:
-        'https://img.freepik.com/premium-photo/generative-ai-portrait-woman-looking-camera-serene-confident_108985-2050.jpg',
-    },
-    {
-      id: 2,
-      name: 'User 2',
-      avatar:
-        'https://img.freepik.com/premium-photo/generative-ai-portrait-woman-looking-camera-serene-confident_108985-2050.jpg',
-    },
-    {
-      id: 3,
-      name: 'User 3',
-      avatar:
-        'https://img.freepik.com/premium-photo/generative-ai-portrait-woman-looking-camera-serene-confident_108985-2050.jpg',
-    },
-    {
-      id: 4,
-      name: 'User 4',
-      avatar:
-        'https://img.freepik.com/premium-photo/generative-ai-portrait-woman-looking-camera-serene-confident_108985-2050.jpg',
-    },
-    {
-      id: 5,
-      name: 'User 5',
-      avatar:
-        'https://img.freepik.com/premium-photo/generative-ai-portrait-woman-looking-camera-serene-confident_108985-2050.jpg',
-    },
-    {
-      id: 6,
-      name: 'User 6',
-      avatar:
-        'https://img.freepik.com/premium-photo/generative-ai-portrait-woman-looking-camera-serene-confident_108985-2050.jpg',
-    },
-    {
-      id: 7,
-      name: 'User 7',
-      avatar:
-        'https://img.freepik.com/premium-photo/generative-ai-portrait-woman-looking-camera-serene-confident_108985-2050.jpg',
-    },
-    {
-      id: 8,
-      name: 'User 8',
-      avatar:
-        'https://img.freepik.com/premium-photo/generative-ai-portrait-woman-looking-camera-serene-confident_108985-2050.jpg',
-    },
-    {
-      id: 9,
-      name: 'User 9',
-      avatar:
-        'https://img.freepik.com/premium-photo/generative-ai-portrait-woman-looking-camera-serene-confident_108985-2050.jpg',
-    },
-    {
-      id: 10,
-      name: 'User 10',
-      avatar:
-        'https://img.freepik.com/premium-photo/generative-ai-portrait-woman-looking-camera-serene-confident_108985-2050.jpg',
-    },
-    // Add more user data as needed
-  ];
-
+  const location = useLocation();
+  const [users, setUsers] = useState([]);
+  const [imagesPerRow, setImagesPerRow] = useState(5);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [imagesPerRow, setImagesPerRow] = useState(5); // Set the number of images per row
-
+  useEffect(() => {}, []);
   useEffect(() => {
+    console.log('Current pathname:', location.pathname);
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/users');
+        setUsers(response.data.data);
+      } catch (error) {
+        console.error('Error fetching user data:', error.message);
+      }
+    };
+
+    fetchData();
+
     const handleResize = () => {
-      // Adjust the number of images per row based on the screen width
       if (window.innerWidth < 822) {
         setImagesPerRow(2);
       } else if (window.innerWidth < 995) {
         setImagesPerRow(4);
       } else {
-        setImagesPerRow(5); // Adjust as needed
+        setImagesPerRow(5);
       }
     };
 
-    // Initial call and add event listener for window resize
     handleResize();
     window.addEventListener('resize', handleResize);
 
-    // Cleanup the event listener on component unmount
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
-  const handleClick = (user) => {
-    setSelectedUser(user);
-  };
-
-  const renderImageRows = () => {
-    const rows = [];
-    for (let i = 0; i < users.length; i += imagesPerRow) {
-      const row = users.slice(i, i + imagesPerRow);
-      rows.push(
-        <div className="user-row" key={i}>
-          {row.map((user) => (
-            <Link key={user.id} to={`/HomePage/${user.id}`}>
-              <img
-                src={user.avatar}
-                alt={user.name}
-                className="user-picture"
-                onClick={() => handleClick(user)}
-              />
-            </Link>
-          ))}
-        </div>
-      );
-    }
-    return rows;
+  const getUserInformations = (userId) => {
+    console.log('u', userId._id);
+    localStorage.setItem('selectedUserId', JSON.stringify(userId._id));
+    setSelectedUser(userId);
   };
 
   return (
     <div className="user-grid">
-      {renderImageRows()}
-      {selectedUser && (
-        <UserProfile
-          user={selectedUser}
-          onClose={() => setSelectedUser(null)}
-        />
-      )}
+      {users.map((user) => (
+        <>
+          <button
+            className="makeitinisdeimage"
+            onClick={() => getUserInformations(user)}
+          >
+            <Link key={user._id} to={`/${user._id}`}>
+              <img src={user.avatar} alt={user.name} className="user-picture" />
+            </Link>
+          </button>
+        </>
+      ))}
     </div>
   );
 };
 
 export default UserGrid;
+
+
+
+
+
+
+
+// import { useState, useEffect } from 'react';
+// import { Link } from 'react-router-dom';
+// import axios from 'axios';
+// import './UserGrid.css';
+// import { useLocation } from 'react-router-dom';
+// import UserProfile from './UserProfile';
+
+// const UserGrid = () => {
+//   const location = useLocation();
+//   const [users, setUsers] = useState([]);
+//   const [imagesPerRow, setImagesPerRow] = useState(5);
+//   const [selectedUser, setSelectedUser] = useState(null);
+//   useEffect(() => {}, []);
+//   useEffect(() => {
+//     console.log('Current pathname:', location.pathname);
+
+//     const fetchData = async () => {
+//       try {
+//         const response = await axios.get('http://localhost:5000/api/users');
+//         setUsers(response.data.data);
+//       } catch (error) {
+//         console.error('Error fetching user data:', error.message);
+//       }
+//     };
+
+//     fetchData();
+
+//     const handleResize = () => {
+//       if (window.innerWidth < 822) {
+//         setImagesPerRow(2);
+//       } else if (window.innerWidth < 995) {
+//         setImagesPerRow(4);
+//       } else {
+//         setImagesPerRow(5);
+//       }
+//     };
+
+//     handleResize();
+//     window.addEventListener('resize', handleResize);
+
+//     return () => {
+//       window.removeEventListener('resize', handleResize);
+//     };
+//   }, []);
+
+//   const getUserInformations = (userId) => {
+//     console.log('u', userId._id);
+//     localStorage.setItem('selectedUserId', JSON.stringify(userId._id));
+//     setSelectedUser(userId);
+//   };
+
+//   return (
+//     <div className="user-grid">
+//       {users.map((user) => (
+//         <>
+//           <button
+//             className="makeitinisdeimage"
+//             onClick={() => getUserInformations(user)}
+//           >
+//             <Link key={user._id} to={`/${user._id}`}>
+//               <img src={user.avatar} alt={user.name} className="user-picture" />
+//             </Link>
+//           </button>
+//         </>
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default UserGrid;

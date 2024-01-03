@@ -7,38 +7,39 @@ import SignUp from './Pages/SignUp/SignUp';
 import LogIn from './Pages/LogIn/LogIn';
 import './Component/Navbar.css';
 import UserProfile from './Pages/HomePageUseresPictures.jsx/UserProfile';
-import InterestsPage from './Pages/InterestsPage/InterestsPage'
-import CreateAccount from './Pages/CreateAccount/CreateAccount'
+import InterestsPage from './Pages/InterestsPage/InterestsPage';
+import CreateAccount from './Pages/CreateAccount/CreateAccount';
+import  {SearchPageProvider} from './context/SearchPageContext'
 
 function App() {
   return (
     <>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/MyProfile" element={<MyProfile />} />
-          <Route path="/HomePage" element={<HomePage />} />
+      <SearchPageProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/MyProfile" element={<MyProfile />} />
+            <Route path="/" element={<HomePage />} />
 
-          <Route path="/SignUp" element={<SignUp />} />
-          <Route
-            path="/SignUp/CreateAccount/interests"
-            element={<InterestsPage />}
-          />
-          <Route path="/SignUp/CreateAccount" element={<CreateAccount />} />
+            <Route path="/SignUp" element={<SignUp />} />
+            <Route
+              path="/SignUp/CreateAccount/interests"
+              element={<InterestsPage />}
+            />
+            <Route path="/SignUp/CreateAccount" element={<CreateAccount />} />
 
-          <Route path="/LogIn" element={<LogIn />} />
-          <Route path="/HomePage/:userId" element={<UserProfile />} />
-          {/* Add more routes as needed */}
-        </Routes>
-      </Router>
+            <Route path="/LogIn" element={<LogIn />} />
+            <Route path="/:userId" element={<UserProfile />} />
+            {/* Add more routes as needed */}
+          </Routes>
+        </Router>
+      </SearchPageProvider>
     </>
   );
 }
 
 export default App;
-
-
 
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import Navbar from './Component/Navbar';
