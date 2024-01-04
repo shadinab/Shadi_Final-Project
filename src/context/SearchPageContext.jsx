@@ -12,6 +12,9 @@ export const SearchPageProvider = ({ children }) => {
 
  const [searchResults, setSearchResults] = useState([]);
 
+  const [MyData, setMyData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   // Add more state variables as needed
 
   // Wrap the children with the context provider, passing the state variables
@@ -28,6 +31,10 @@ export const SearchPageProvider = ({ children }) => {
         setCountry,
         searchResults,
         setSearchResults,
+        MyData,
+        setMyData,
+        loading,
+        setLoading
       }}
     >
       {children}

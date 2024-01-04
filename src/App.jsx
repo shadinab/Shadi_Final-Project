@@ -9,32 +9,35 @@ import './Component/Navbar.css';
 import UserProfile from './Pages/HomePageUseresPictures.jsx/UserProfile';
 import InterestsPage from './Pages/InterestsPage/InterestsPage';
 import CreateAccount from './Pages/CreateAccount/CreateAccount';
-import  {SearchPageProvider} from './context/SearchPageContext'
+import { SearchPageProvider } from './context/SearchPageContext';
+// import { UserProvider } from '../src/context/UserContext';
 
 function App() {
   return (
     <>
-      <SearchPageProvider>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/MyProfile" element={<MyProfile />} />
-            <Route path="/" element={<HomePage />} />
+      {/* <UserProvider> */}
+        <SearchPageProvider>
+          <Router>
+            <Navbar />
+            <Routes>
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/MyProfile" element={<MyProfile />} />
+              <Route path="/" element={<HomePage />} />
 
-            <Route path="/SignUp" element={<SignUp />} />
-            <Route
-              path="/SignUp/CreateAccount/interests"
-              element={<InterestsPage />}
-            />
-            <Route path="/SignUp/CreateAccount" element={<CreateAccount />} />
+              <Route path="/SignUp" element={<SignUp />} />
+              <Route
+                path="/SignUp/CreateAccount/interests"
+                element={<InterestsPage />}
+              />
+              <Route path="/SignUp/CreateAccount" element={<CreateAccount />} />
 
-            <Route path="/LogIn" element={<LogIn />} />
-            <Route path="/:userId" element={<UserProfile />} />
-            {/* Add more routes as needed */}
-          </Routes>
-        </Router>
-      </SearchPageProvider>
+              <Route path="/LogIn" element={<LogIn />} />
+              <Route path="/:userId" element={<UserProfile />} />
+              {/* Add more routes as needed */}
+            </Routes>
+          </Router>
+        </SearchPageProvider>
+      {/* </UserProvider> */}
     </>
   );
 }
