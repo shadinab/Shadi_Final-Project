@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import './UserProfile.css'
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
@@ -86,20 +87,26 @@ const UserProfile = () => {
 
 export default UserProfile;
 
-// // UserProfile.jsx
+
+
+
+
 // import { useState, useEffect } from 'react';
 // import axios from 'axios';
+// import { useParams } from 'react-router-dom';
 
-// const UserProfile = ({ onClose, selectedUser }) => {
+// const UserProfile = () => {
 //   const [userData, setUserData] = useState(null);
-
+//   const { id } = useParams();
+//   const getUserSelectedData =JSON.parse( localStorage.getItem('selectedUserId'))
+//   console.log('getUserSelectedData._id.', getUserSelectedData);
 //   useEffect(() => {
 //     const fetchUserData = async () => {
 //       try {
 //         const response = await axios.get(
-//           // `http://localhost:5000/api/users/${selectedUser}`
-//           `http://localhost:5000/api/users/6593282cb763d501d3090406`
+//           `http://localhost:5000/api/users/${getUserSelectedData}`
 //         );
+//         console.log('Response:', response.data);
 //         setUserData(response.data.data);
 //       } catch (error) {
 //         console.error('Error fetching user data:', error.message);
@@ -107,18 +114,15 @@ export default UserProfile;
 //     };
 
 //     fetchUserData();
-
-//     return () => {
-//       // Cleanup code can go here if needed
-//     };
-//   }, [selectedUser]);
+//   }, [id]); // Add 'id' as a dependency
 
 //   if (!userData) {
-//     return null;
+//     // Show a loading indicator or message while data is being fetched
+//     return <p>Loading...</p>;
 //   }
 
 //   return (
-//     <div className="user-profile" onClick={onClose}>
+//     <div className="user-profile">
 //       <div className="profile-background">
 //         <img
 //           src={userData.background}

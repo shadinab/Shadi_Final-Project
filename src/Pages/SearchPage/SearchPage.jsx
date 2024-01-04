@@ -1,8 +1,14 @@
+
+
 import './SearchPage.css';
 import axios from 'axios';
 import { useGlobalSearchPage } from '../../context/SearchPageContext';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const SearchPage = () => {
+    const navigate = useNavigate();
   const {
     gender,
     setGender,
@@ -57,6 +63,13 @@ const meetsAgeRangeCriteria = userMinAge >= minAge && userMaxAge <= maxAge;
     } catch (error) {
       console.error('Error searching for users:', error);
     }
+  };
+
+  const navigateToUserProfile = (userId) => {
+    // Redirect to the UserProfile page with the user's ID
+ localStorage.setItem('selectedUserId', JSON.stringify(userId._id));
+ console.log(userId._id);
+  navigate(`/${userId._id}`);
   };
 
   return (
@@ -114,7 +127,7 @@ const meetsAgeRangeCriteria = userMinAge >= minAge && userMaxAge <= maxAge;
       {searchResults.length > 0 ? (
         <ul>
           {searchResults.map((user) => (
-            <li key={user._id}>
+            <li key={user._id} onClick={() => navigateToUserProfile(user)}>
               <div>
                 <img src={user.avatar} alt={`Avatar of ${user.name}`} />
               </div>
@@ -141,11 +154,23 @@ const meetsAgeRangeCriteria = userMinAge >= minAge && userMaxAge <= maxAge;
 
 export default SearchPage;
 
+
+
+
+
+
+
+
+
 // import './SearchPage.css';
 // import axios from 'axios';
 // import { useGlobalSearchPage } from '../../context/SearchPageContext';
+// import { useNavigate } from 'react-router-dom';
+
+
 
 // const SearchPage = () => {
+//     const navigate = useNavigate();
 //   const {
 //     gender,
 //     setGender,
@@ -161,18 +186,52 @@ export default SearchPage;
 
 //   const handleSearch = async () => {
 //     try {
-//       // Create a query string based on user input
-//       const queryString = `gender=${gender}&ageRange=${minAge}-${maxAge}&country=${country}`;
-//       // Make a GET request to the API endpoint
-//       const response = await axios.get(
-//         `http://localhost:5000/api/users?${queryString}`
-//       );
+//       // Make a GET request to the API endpoint to get all users
+//       const response = await axios.get('http://localhost:5000/api/users');
 
-//       setSearchResults(response.data.data);
-//       console.log('setSearchResults:', setSearchResults);
+//       // Assuming the server responds with a 'data' property containing the user data
+//       const allUsers = response.data.data;
+
+//       // Filter the users based on the selected criteria
+//       const filteredUsers = allUsers.filter((user) => {
+//         const meetsCountryCriteria = country
+//           ? user.details.liveIn === country
+//           : true;
+
+//           const userMinAge = parseInt(
+//             user.preferences.ageRange.split('-')[0],
+//             10
+//           );
+//           const userMaxAge = parseInt(
+//             user.preferences.ageRange.split('-')[1],
+//             10
+//           );
+
+// const meetsAgeRangeCriteria = userMinAge >= minAge && userMaxAge <= maxAge;
+
+
+//         const meetsGenderCriteria = user.preferences.gender === gender;
+
+//                                             console.log(meetsGenderCriteria);
+
+//         return (
+//           meetsCountryCriteria && meetsAgeRangeCriteria && meetsGenderCriteria
+//         );
+//       });
+
+
+//       // Update the state with the filtered users
+//       setSearchResults(filteredUsers);
 //     } catch (error) {
 //       console.error('Error searching for users:', error);
 //     }
+//   };
+
+//   const navigateToUserProfile = (userId) => {
+//     // Redirect to the UserProfile page with the user's ID
+//  localStorage.setItem('selectedUserId', JSON.stringify(userId._id));
+//  console.log(userId._id);
+//   navigate(`/${userId._id}`);
 //   };
 
 //   return (
@@ -230,7 +289,7 @@ export default SearchPage;
 //       {searchResults.length > 0 ? (
 //         <ul>
 //           {searchResults.map((user) => (
-//             <li key={user._id}>
+//             <li key={user._id} onClick={() => navigateToUserProfile(user)}>
 //               <div>
 //                 <img src={user.avatar} alt={`Avatar of ${user.name}`} />
 //               </div>
@@ -256,3 +315,10 @@ export default SearchPage;
 // };
 
 // export default SearchPage;
+
+
+
+
+
+
+

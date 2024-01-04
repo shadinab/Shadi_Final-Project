@@ -1,43 +1,48 @@
 .user-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.user-row {
+  margin-top: 5rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 10px; /* Reduce the margin between rows */
+}
+
+.user-item {
+  margin: 10px;
 }
 
 .user-picture {
-  width: 190px; /* Increase the width of the images */
-  height: 190px; /* Increase the height of the images */
-  margin: 0 5px; /* Remove the margin between images */
+  width: 190px;
+  height: 190px;
   object-fit: cover;
   border-radius: 10px;
   cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.user-picture:hover {
+  transform: scale(1.1);
+}
+
+.makeitinsideimage
+{
+ background: rgb(223, 222, 222);
+}
+
+.makeitinsideimage:hover{
+  background: black;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .user-picture {
-    width: 120px; /* Adjust width for smaller screens */
-    height: 120px; /* Adjust height for smaller screens */
+    width: 120px;
+    height: 120px;
   }
 }
 
 @media (max-width: 480px) {
   .user-picture {
-    width: 120px; /* Further adjust width for even smaller screens */
-    height: 120px; /* Further adjust height for even smaller screens */
+    width: 100px;
+    height: 100px;
   }
 }
 
-.makeitinisdeimage {
-  /* background: none; */
-}
-.makeitinisdeimage:hover {
-  /* background: none; */
-}
