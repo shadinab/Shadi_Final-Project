@@ -89,29 +89,41 @@ export default SignUp;
 
 
 
-
-
 // import { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
-// // import '../CreateAccount/CreateAccount.css';
-// import CreateAccount from '../CreateAccount/CreateAccount'
-// import './SignUp.css'
+// import axios from 'axios';
+// import CreateAccount from '../CreateAccount/CreateAccount';
+// import './SignUp.css';
 
 // const SignUp = () => {
 //   const navigate = useNavigate();
 //   const [showRegistration, setShowRegistration] = useState(false);
 //   const [username, setUsername] = useState('');
 //   const [password, setPassword] = useState('');
+// const handleSignUp = async () => {
+//   try {
+//     const response = await axios.post(
+//       'http://localhost:5000/api/auth/register',
+//       {
+//         name: username,
+//         email: username,
+//         password: password,
+//       }
+//     );
 
- 
+//     console.log('Axios response:', response);
 
-//   const handleSignUp = () => {
-//     // Perform sign-up logic here...
-//     navigate('/SignUp/CreateAccount');
+//     if (response.data.success) {
+//       setShowRegistration(true);
+//       navigate('/SignUp/CreateAccount');
+//     } else {
+//       console.error('Registration failed:', response.data.error);
+//     }
+//   } catch (error) {
+//     console.error('An error occurred during registration:', error.message);
+//   }
+// };
 
-//     // Once sign-up is successful, show the CreateAccount
-//     setShowRegistration(true);
-//   };
 
 //   const onClose = () => {
 //     // Perform sign-up logic here...
@@ -124,7 +136,7 @@ export default SignUp;
 //   return (
 //     <div>
 //       {showRegistration ? (
-//         <CreateAccount onClose={() => setShowRegistration(false) } />
+//         <CreateAccount onClose={() => setShowRegistration(false)} />
 //       ) : (
 //         <div className="SignUpContainer">
 //           <div className="SignUpBox">
@@ -165,3 +177,4 @@ export default SignUp;
 // };
 
 // export default SignUp;
+

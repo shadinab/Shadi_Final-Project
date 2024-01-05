@@ -36,7 +36,7 @@ const InterestsPage = ({ userData }) => {
     navigate('/LogIn');
   };
    const onBack = () => {
-     navigate('/SignUp/CreateAccount');
+     navigate('/SignUp/CreateAccount/AcoountDetails');
    };
 
   return (

@@ -11,32 +11,36 @@ import InterestsPage from './Pages/InterestsPage/InterestsPage';
 import CreateAccount from './Pages/CreateAccount/CreateAccount';
 import { SearchPageProvider } from './context/SearchPageContext';
 // import { UserProvider } from '../src/context/UserContext';
-
+import AcoountDetails from '../src/Pages/CreateAccount/AcoountDetails';
 function App() {
   return (
     <>
       {/* <UserProvider> */}
-        <SearchPageProvider>
-          <Router>
-            <Navbar />
-            <Routes>
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/MyProfile" element={<MyProfile />} />
-              <Route path="/" element={<HomePage />} />
+      <SearchPageProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/MyProfile" element={<MyProfile />} />
+            <Route path="/" element={<HomePage />} />
 
-              <Route path="/SignUp" element={<SignUp />} />
-              <Route
-                path="/SignUp/CreateAccount/interests"
-                element={<InterestsPage />}
-              />
-              <Route path="/SignUp/CreateAccount" element={<CreateAccount />} />
+            <Route path="/SignUp" element={<SignUp />} />
+            <Route
+              path="/SignUp/CreateAccount/AcoountDetails/interests"
+              element={<InterestsPage />}
+            />
+            <Route path="/SignUp/CreateAccount" element={<CreateAccount />} />
+            <Route
+              path="/SignUp/CreateAccount/AcoountDetails"
+              element={<AcoountDetails />}
+            />
 
-              <Route path="/LogIn" element={<LogIn />} />
-              <Route path="/:userId" element={<UserProfile />} />
-              {/* Add more routes as needed */}
-            </Routes>
-          </Router>
-        </SearchPageProvider>
+            <Route path="/LogIn" element={<LogIn />} />
+            <Route path="/:userId" element={<UserProfile />} />
+            {/* Add more routes as needed */}
+          </Routes>
+        </Router>
+      </SearchPageProvider>
       {/* </UserProvider> */}
     </>
   );

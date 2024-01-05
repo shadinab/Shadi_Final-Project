@@ -21,7 +21,7 @@ const CreateAccount = () => {
     // You can add validation logic here before moving to the next page
     // For simplicity, let's assume all fields are required
     // Move to the next page (interests page)
-    navigate('/SignUp/CreateAccount/interests', { state: { userData } });
+    navigate('/SignUp/CreateAccount/AcoountDetails', { state: { userData } });
   };
 
   return (
