@@ -1,38 +1,59 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import CreateAccount from '../CreateAccount/CreateAccount';
 import './SignUp.css';
+import { createSignUpUser } from '../../api/apiService';
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [showRegistration, setShowRegistration] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  
 const handleSignUp = async () => {
   try {
-    const response = await axios.post(
-      'http://localhost:5000/api/auth/register',
-      {
-        name: username,
-        email: username,
-        password: password,
-      }
-    );
+    const response = await createSignUpUser({
+      name: username,
+      email: username,
+      password: password,
+    });
 
-    console.log('Axios response:', response);
-
-    if (response.data.success) {
+    if (response.success) {
       setShowRegistration(true);
       navigate('/SignUp/CreateAccount');
     } else {
-      console.error('Registration failed:', response.data.error);
+      console.error('Registration failed:', response.error);
     }
   } catch (error) {
     console.error('An error occurred during registration:', error.message);
   }
 };
 
+
+// const handleSignUp = async () => {
+//   try {
+//     const response = await axios.post(
+//       'http://localhost:5000/api/auth/register',
+//       {
+//         name: username,
+//         email: username,
+//         password: password,
+//       }
+//     );
+
+//     console.log('Axios response:', response);
+
+//     if (response.data.success) {
+//       setShowRegistration(true);
+//       navigate('/SignUp/CreateAccount');
+//     } else {
+//       console.error('Registration failed:', response.data.error);
+//     }
+//   } catch (error) {
+//     console.error('An error occurred during registration:', error.message);
+//   }
+// };
 
   const onClose = () => {
     // Perform sign-up logic here...
@@ -86,7 +107,6 @@ const handleSignUp = async () => {
 };
 
 export default SignUp;
-
 
 
 // import { useState } from 'react';
@@ -177,4 +197,5 @@ export default SignUp;
 // };
 
 // export default SignUp;
+
 

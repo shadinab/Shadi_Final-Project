@@ -9,7 +9,7 @@ const MyProfile = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:5000/api/users/65932968b763d501d309042c'
+          'http://localhost:5000/api/users/659838708612e4dc6a9bce7d'
         );
         const profileData = response.data.data;
         setMyData(profileData);
