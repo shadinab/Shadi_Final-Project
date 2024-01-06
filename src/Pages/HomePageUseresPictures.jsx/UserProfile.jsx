@@ -48,7 +48,15 @@ const UserProfile = () => {
           <h2>{userData.name}</h2>
           <div className="user-description">{userData.description}</div>
         </div>
+        <div>
+          <h2>My interest</h2>
+          <div className="user-description">
+            {userData.interests.join(', ')}
+          </div>
+        </div>
+
         <div className="user-description">
+          <h2>More Aboute Me</h2>
           {Object.entries(userData.details).map(([key, value]) => (
             <div key={key}>
               <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
@@ -56,12 +64,13 @@ const UserProfile = () => {
             </div>
           ))}
         </div>
+
         <div className="user-additional-info">
           {userData.preferences && (
             <>
               <h3>Looking For</h3>
               <p className="user-description">
-                {userData.preferences.gender}, {userData.preferences.ageRange}
+                {userData.preferences.gender} {userData.preferences.ageRange}
               </p>
               {/* ... (other preferences rendering) */}
             </>

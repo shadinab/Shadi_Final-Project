@@ -38,10 +38,10 @@ const UserGrid = () => {
     };
   }, []);
 
-  const getUserInformations = (userId) => {
-    console.log('User ID:', userId._id);
-    localStorage.setItem('selectedUserId', JSON.stringify(userId._id));
-    setSelectedUser(userId);
+  const getUserInformations = (user) => {
+    console.log('User Connection ID:', user.connectionId);
+    localStorage.setItem('selectedUserId', JSON.stringify(user.connectionId));
+    setSelectedUser(user);
   };
 
   return (
@@ -52,7 +52,7 @@ const UserGrid = () => {
             className="makeitinsideimage"
             onClick={() => getUserInformations(user)}
           >
-            <Link key={user._id} to={`/${user._id}`}>
+            <Link key={user.connectionId} to={`/${user.connectionId}`}>
               <img src={user.avatar} alt={user.name} className="user-picture" />
             </Link>
           </button>
@@ -64,22 +64,20 @@ const UserGrid = () => {
 
 export default UserGrid;
 
+
+
+
 // import { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 // import axios from 'axios';
 // import './UserGrid.css';
-// import { useLocation } from 'react-router-dom';
-// import UserProfile from './UserProfile';
 
 // const UserGrid = () => {
-//   const location = useLocation();
 //   const [users, setUsers] = useState([]);
 //   const [imagesPerRow, setImagesPerRow] = useState(5);
 //   const [selectedUser, setSelectedUser] = useState(null);
-//   useEffect(() => {}, []);
-//   useEffect(() => {
-//     console.log('Current pathname:', location.pathname);
 
+//   useEffect(() => {
 //     const fetchData = async () => {
 //       try {
 //         const response = await axios.get('http://localhost:5000/api/users');
@@ -110,7 +108,7 @@ export default UserGrid;
 //   }, []);
 
 //   const getUserInformations = (userId) => {
-//     console.log('u', userId._id);
+//     console.log('User ID:', userId._id);
 //     localStorage.setItem('selectedUserId', JSON.stringify(userId._id));
 //     setSelectedUser(userId);
 //   };
@@ -118,16 +116,16 @@ export default UserGrid;
 //   return (
 //     <div className="user-grid">
 //       {users.map((user) => (
-//         <>
+//         <div className="user-item" key={user._id}>
 //           <button
-//             className="makeitinisdeimage"
+//             className="makeitinsideimage"
 //             onClick={() => getUserInformations(user)}
 //           >
 //             <Link key={user._id} to={`/${user._id}`}>
 //               <img src={user.avatar} alt={user.name} className="user-picture" />
 //             </Link>
 //           </button>
-//         </>
+//         </div>
 //       ))}
 //     </div>
 //   );

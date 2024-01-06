@@ -16,7 +16,6 @@ const CreateAccount = () => {
   useEffect(() => {
     // Retrieve connectionId from local storage
     const storedConnectionId = localStorage.getItem('connectionId');
-    console.log(storedConnectionId);
     if (storedConnectionId) {
       setUserData((prevData) => ({
         ...prevData,
@@ -54,7 +53,7 @@ const CreateAccount = () => {
           onChange={handleChange}
         />
 
-        <label htmlFor="gender">Gender:</label>
+        <label htmlFor="gender">Looking For:</label>
         <select
           id="gender"
           name="gender"
