@@ -1,22 +1,30 @@
-// UserContext.js
-// import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
-// const UserContext = createContext();
+const UserContext = createContext();
 
-// export const UserProvider = ({ children }) => {
-//   const [user, setUser] = useState(null);
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+            console.log(`user-${user}`);
 
-//   const setLoggedInUser = (userData) => {
-//     setUser(userData);
-//   };
+  const login = (userData) => {
+    setUser(userData);
+  };
 
-//   return (
-//     <UserContext.Provider value={{ user, setLoggedInUser }}>
-//       {children}
-//     </UserContext.Provider>
-//   );
-// };
+  const logout = () => {
+    setUser(null);
+  };
 
-// export const useUser = () => {
-//   return useContext(UserContext);
-// };
+  return (
+    <UserContext.Provider value={{ user, login, logout }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+export const useUser = () => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('useUser must be used within a UserProvider');
+  }
+  return context;
+};

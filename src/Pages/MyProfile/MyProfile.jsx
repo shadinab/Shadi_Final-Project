@@ -2,35 +2,36 @@ import { useEffect } from 'react';
 // import axios from 'axios';
 import './MyProfile.css';
 import {useGlobalSearchPage} from '../../context/SearchPageContext'
-import {myProfileConnectionId} from '../../api/apiService'
+import { MyProfileConnectionId } from '../../api/apiService';
+// import { useUser } from '../../context/UserContext';
+
 const MyProfile = () => {
   const { MyData, setMyData, loading, setLoading } = useGlobalSearchPage();
+ useEffect(() => {
+   const fetchProfileData = async () => {
+     try {
+       const response = await MyProfileConnectionId(MyData);
+       console.log(`myprofileresponse- ${JSON.stringify(response)}`);
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await myProfileConnectionId(MyData);
+       if (response.success) {
+         const profileData = response.data; // Assuming response.data is already a JSON object
+         setMyData(profileData);
+         console.log(profileData);
+       } else {
+         setLoading(false);
+         console.error('Error fetching profile data:', response.error);
+       }
+     } catch (error) {
+       setLoading(false);
+       console.error('Error fetching profile data:', error.message);
+     }
+   };
 
-      if (response.success) {
-        const profileData = response.data;
-        setMyData(profileData);
-        console.log(profileData);
-      } else {
-        setLoading(false);
-        console.error('Error fetching profile data:', response.error);
-      }
-    } catch (error) {
-      setLoading(false);
-      console.error('Error fetching profile data:', error.message);
-    }
-  };
+   fetchProfileData();
+ }, []);
 
-  fetchData(); // Call fetchData here
-}, []); 
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+
 
   if (!MyData) {
     return <p>Error fetching profile data</p>;
@@ -94,7 +95,28 @@ useEffect(() => {
 export default MyProfile;
 
 
+// useEffect(() => {
+//   const fetchData = async () => {
+//     try {
+//       const response = await myProfileConnectionId(user);
+//       const connectionId = localStorage.getItem('connectionId');
 
+//       if (response.success) {
+//         const profileData = response.data;
+//         setMyData(profileData);
+//         console.log(profileData);
+//       } else {
+//         setLoading(false);
+//         console.error('Error fetching profile data:', response.error);
+//       }
+//     } catch (error) {
+//       setLoading(false);
+//       console.error('Error fetching profile data:', error.message);
+//     }
+//   };
+
+//   fetchData(); // Call fetchData here
+// }, [user]); 
 
 
 

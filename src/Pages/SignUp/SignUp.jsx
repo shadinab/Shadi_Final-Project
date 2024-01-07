@@ -20,6 +20,7 @@ const handleSignUp = async () => {
     });
 
     if (response.success) {
+       localStorage.setItem('connectionId', response.data.connectionId);
       setShowRegistration(true);
       navigate('/SignUp/CreateAccount');
     } else {

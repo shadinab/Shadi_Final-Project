@@ -65,3 +65,32 @@ export const myProfileConnectionId = async (userData) => {
     throw error; // Rethrow the error
   }
 };
+
+
+export const MyProfileConnectionId = async (userData) => {
+  try {
+ const tokenconnectionId = (
+   localStorage.getItem('tokenconnectionId') );
+ 
+ console.log(`api tokenconnectionId ${tokenconnectionId} `);
+    
+    // Check if tokenconnectionId is available in localStorage
+    if (!tokenconnectionId) {
+      // Handle the case where tokenconnectionId is not available (optional)
+      console.error('tokenconnectionId not found in localStorage');
+      return null;
+    }
+
+    // Assuming you want to include tokenconnectionId in the request headers
+    const response = await apiService.get(`users/${tokenconnectionId}`, {
+      userData,
+    });
+
+
+    console.log('myProfileConnectionId Response:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error getting your profile data:', error);
+    throw error;
+  }
+};

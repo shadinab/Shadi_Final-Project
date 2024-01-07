@@ -2,19 +2,22 @@
 // LogIn.// LogIn.jsx
 import { useState } from 'react';
 import SignUp from '../SignUp/SignUp';
+// import MyProfile from '../MyProfile/MyProfile';
+// import { useUser } from '../../context/UserContext'; // Update the path
+
 import axios from 'axios'; // Import Axios
 import { useNavigate } from 'react-router-dom';
-// import { useUser } from '../../context/UserContext';
 import './LogIn.css';
 
 
 const LogIn = () => {
-  //  const { setLoggedInUser } = useUser();
-   const navigate = useNavigate();
+//  const { login,user } = useUser(); 
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showSignUp, setShowSignUp] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(true);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
 
   const handleLogin = async () => {
     try {
@@ -29,20 +32,24 @@ const LogIn = () => {
 
       console.log('Axios login response:', response);
 
-      if (response.data.success) {
-                // setLoggedInUser(response.data.user);
+     if (response.data.success) {
+            localStorage.setItem(
+              'tokenconnectionId',
+              response.data.connectionId
+            );
+            console.log(`logininconnectionId-${response.data.connectionId}`);
 
-        // Handle successful login (e.g., store user data in state or context)
+      // login(response); // Set login status to true
         navigate('/');
       } else {
-        // Handle unsuccessful login (show an error message, etc.)
         console.error('Login failed:', response.data.error);
       }
     } catch (error) {
-      // Handle other errors, e.g., network issues
       console.error('An error occurred during login:', error.message);
     }
   };
+
+
 
 
   const handleSignUp = () => {
@@ -104,19 +111,28 @@ export default LogIn;
 
 
 
+
+
+
 // // LogIn.// LogIn.jsx
 // import { useState } from 'react';
 // import SignUp from '../SignUp/SignUp';
+// // import MyProfile from '../MyProfile/MyProfile';
+// // import { useUser } from '../../context/UserContext'; // Update the path
+
 // import axios from 'axios'; // Import Axios
 // import { useNavigate } from 'react-router-dom';
 // import './LogIn.css';
 
+
 // const LogIn = () => {
-//    const navigate = useNavigate();
+// //  const { login,user } = useUser(); 
+//   const navigate = useNavigate();
 //   const [username, setUsername] = useState('');
 //   const [password, setPassword] = useState('');
 //   const [showSignUp, setShowSignUp] = useState(false);
 //   const [showLoginForm, setShowLoginForm] = useState(true);
+//   // const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
 
 //   const handleLogin = async () => {
 //     try {
@@ -131,18 +147,18 @@ export default LogIn;
 
 //       console.log('Axios login response:', response);
 
-//       if (response.data.success) {
-//         // Handle successful login (e.g., store user data in state or context)
+//      if (response.data.success) {
+//       // login(response); // Set login status to true
 //         navigate('/');
 //       } else {
-//         // Handle unsuccessful login (show an error message, etc.)
 //         console.error('Login failed:', response.data.error);
 //       }
 //     } catch (error) {
-//       // Handle other errors, e.g., network issues
 //       console.error('An error occurred during login:', error.message);
 //     }
 //   };
+
+
 
 
 //   const handleSignUp = () => {
@@ -201,3 +217,4 @@ export default LogIn;
 // };
 
 // export default LogIn;
+
