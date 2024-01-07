@@ -5,7 +5,19 @@
   padding: 20px;
   text-align: center;
 }
+.center-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* This ensures the container takes the full height of the viewport */
+}
 
+.loading-message,
+.login-message {
+  font-size: 50px;
+  color: #333333; /* Adjust the color as needed */
+  /* Add more styles as needed */
+}
 .profile-header {
   position: relative;
 }

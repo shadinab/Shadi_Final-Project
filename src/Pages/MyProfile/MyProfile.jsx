@@ -6,7 +6,7 @@ import { MyProfileConnectionId } from '../../api/apiService';
 // import { useUser } from '../../context/UserContext';
 
 const MyProfile = () => {
-  const { MyData, setMyData, loading, setLoading } = useGlobalSearchPage();
+  const { MyData, setMyData } = useGlobalSearchPage();
  useEffect(() => {
    const fetchProfileData = async () => {
      try {
@@ -18,11 +18,9 @@ const MyProfile = () => {
          setMyData(profileData);
          console.log(profileData);
        } else {
-         setLoading(false);
          console.error('Error fetching profile data:', response.error);
        }
      } catch (error) {
-       setLoading(false);
        console.error('Error fetching profile data:', error.message);
      }
    };
@@ -32,10 +30,13 @@ const MyProfile = () => {
 
 
 
-
-  if (!MyData) {
-    return <p>Error fetching profile data</p>;
-  }
+if (!MyData) {
+  return (
+    <div className="center-container">
+      <p className="login-message">Please Log In....</p>
+    </div>
+  );
+}
   return (
     <div className="user-profile">
       <div className="profile-background">

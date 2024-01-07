@@ -7,11 +7,15 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="leftContainer">
         {/* Left side SVG as a link to the home page */}
+
+        <Link to="/LogIn" className="navLink">
+          Log In
+        </Link>
         <Link to="/" className="logoLink">
           <img src="/public/Navbar svg.png" alt="Logo" className="logo" />
         </Link>
-        <Link to="/LogIn" className="navLink">
-          Log In
+        <Link to="/LogOut" className="navLink">
+          Log Out
         </Link>
       </div>
       <div className="rightContainer">

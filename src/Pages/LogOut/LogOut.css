@@ -1,0 +1,21 @@
+/* Your existing styles for .navbar and other classes */
+
+.logout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* This ensures the container takes the full height of the viewport */
+}
+
+.navLink.center {
+  /* Add your specific styling for the centered button */
+  padding: 10px;
+  background-color: #298dcf;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  /* Add more styles as needed */
+}

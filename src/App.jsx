@@ -12,35 +12,38 @@ import CreateAccount from './Pages/CreateAccount/CreateAccount';
 import { SearchPageProvider } from './context/SearchPageContext';
 import AcoountDetails from '../src/Pages/CreateAccount/AcoountDetails';
 // import { UserProvider } from '../src/context/UserContext';
+import LogOut from '../src/Pages/LogOut/LogOut'
 
 function App() {
   return (
     <>
       {/* <UserProvider> */}
-        <SearchPageProvider>
-          <Router>
-            <Navbar />
-            <Routes>
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/MyProfile" element={<MyProfile />} />
-              <Route path="/" element={<HomePage />} />
+      <SearchPageProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/MyProfile" element={<MyProfile />} />
+            <Route path="/" element={<HomePage />} />
 
-              <Route path="/SignUp" element={<SignUp />} />
-              <Route
-                path="/SignUp/CreateAccount/AcoountDetails/interests"
-                element={<InterestsPage />}
-              />
-              <Route path="/SignUp/CreateAccount" element={<CreateAccount />} />
-              <Route
-                path="/SignUp/CreateAccount/AcoountDetails"
-                element={<AcoountDetails />}
-              />
+            <Route path="/SignUp" element={<SignUp />} />
+            <Route
+              path="/SignUp/CreateAccount/AcoountDetails/interests"
+              element={<InterestsPage />}
+            />
+            <Route path="/SignUp/CreateAccount" element={<CreateAccount />} />
+            <Route
+              path="/SignUp/CreateAccount/AcoountDetails"
+              element={<AcoountDetails />}
+            />
 
-              <Route path="/LogIn" element={<LogIn />} />
-              <Route path="/:userId" element={<UserProfile />} />
-            </Routes>
-          </Router>
-        </SearchPageProvider>
+            <Route path="/LogIn" element={<LogIn />} />
+            <Route path="/LogOut" element={<LogOut />} />
+
+            <Route path="/:userId" element={<UserProfile />} />
+          </Routes>
+        </Router>
+      </SearchPageProvider>
       {/* </UserProvider> */}
     </>
   );
