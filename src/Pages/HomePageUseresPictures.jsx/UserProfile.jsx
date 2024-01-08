@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import './UserProfile.css'
+import './UserProfile.css';
+// import Chat from '../Chat/Chat';
+import { Link } from 'react-router-dom';
+
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
   const { id } = useParams();
-  const getUserSelectedData =JSON.parse( localStorage.getItem('selectedUserId'))
+  const getUserSelectedData = JSON.parse(
+    localStorage.getItem('selectedUserId')
+  );
   console.log('getUserSelectedData._id.', getUserSelectedData);
   useEffect(() => {
     const fetchUserData = async () => {
@@ -37,6 +42,11 @@ const UserProfile = () => {
           alt="Profile Background"
           className="background-image"
         />
+        <Link to={`/${getUserSelectedData}/chat`}>
+          <button className="center">
+           Send a Message To {userData.name}
+          </button>
+        </Link>
       </div>
       <div className="user-details">
         <img
@@ -96,13 +106,10 @@ const UserProfile = () => {
 
 export default UserProfile;
 
-
-
-
-
 // import { useState, useEffect } from 'react';
 // import axios from 'axios';
 // import { useParams } from 'react-router-dom';
+// import './UserProfile.css'
 
 // const UserProfile = () => {
 //   const [userData, setUserData] = useState(null);
@@ -149,7 +156,15 @@ export default UserProfile;
 //           <h2>{userData.name}</h2>
 //           <div className="user-description">{userData.description}</div>
 //         </div>
+//         <div>
+//           <h2>My interest</h2>
+//           <div className="user-description">
+//             {userData.interests.join(', ')}
+//           </div>
+//         </div>
+
 //         <div className="user-description">
+//           <h2>More Aboute Me</h2>
 //           {Object.entries(userData.details).map(([key, value]) => (
 //             <div key={key}>
 //               <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
@@ -157,12 +172,13 @@ export default UserProfile;
 //             </div>
 //           ))}
 //         </div>
+
 //         <div className="user-additional-info">
 //           {userData.preferences && (
 //             <>
 //               <h3>Looking For</h3>
 //               <p className="user-description">
-//                 {userData.preferences.gender}, {userData.preferences.ageRange}
+//                 {userData.preferences.gender} {userData.preferences.ageRange}
 //               </p>
 //               {/* ... (other preferences rendering) */}
 //             </>

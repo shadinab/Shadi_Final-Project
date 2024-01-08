@@ -6,6 +6,7 @@
   object-fit: cover;
 }
 
+
 .user-profile {
   display: flex;
   align-items: center;
@@ -16,6 +17,10 @@
 .profile-background {
   width: 50%; /* Set the width for the background image */
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
 }
 
 .user-details {
