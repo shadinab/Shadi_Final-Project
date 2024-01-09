@@ -1,10 +1,9 @@
-
 // Chat.js
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import './Chat.css'
+import './Chat.css';
 
-const socket = io('http://localhost:3001'); // Replace with your server URL
+const socket = io('http://localhost:5000'); // Replace with your server URL
 
 const Chat = ({ user }) => {
   const [message, setMessage] = useState('');
@@ -67,9 +66,7 @@ const Chat = ({ user }) => {
 
 export default Chat;
 
-
-
-// Chat.js
+// // Chat.js
 // import  { useState, useEffect } from 'react';
 // import io from 'socket.io-client';
 // import './Chat.css'
@@ -136,4 +133,3 @@ export default Chat;
 // };
 
 // export default Chat;
-
