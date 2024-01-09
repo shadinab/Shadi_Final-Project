@@ -54,6 +54,7 @@ const UserGrid = () => {
           >
             <Link key={user.connectionId} to={`/${user.connectionId}`}>
               <img src={user.avatar} alt={user.name} className="user-picture" />
+              <div>{user.name}</div>
             </Link>
           </button>
         </div>

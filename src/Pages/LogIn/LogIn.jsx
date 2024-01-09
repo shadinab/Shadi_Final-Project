@@ -114,6 +114,8 @@ export default LogIn;
 
 
 
+
+
 // // LogIn.// LogIn.jsx
 // import { useState } from 'react';
 // import SignUp from '../SignUp/SignUp';
@@ -148,6 +150,12 @@ export default LogIn;
 //       console.log('Axios login response:', response);
 
 //      if (response.data.success) {
+//             localStorage.setItem(
+//               'tokenconnectionId',
+//               response.data.connectionId
+//             );
+//             console.log(`logininconnectionId-${response.data.connectionId}`);
+
 //       // login(response); // Set login status to true
 //         navigate('/');
 //       } else {
@@ -217,4 +225,6 @@ export default LogIn;
 // };
 
 // export default LogIn;
+
+
 
