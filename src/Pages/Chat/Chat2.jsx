@@ -79,7 +79,6 @@ function Chat({ socket, username, room }) {
 export default Chat;
 
 
-
 // import { useEffect, useState } from 'react';
 // import ScrollToBottom from 'react-scroll-to-bottom';
 
@@ -88,15 +87,15 @@ export default Chat;
 //   const [messageList, setMessageList] = useState([]);
 
 //   const sendMessage = async () => {
-//     if (currentMessage !== '') {
+//     if (currentMessage.trim() !== '') {
 //       const messageData = {
 //         room: room,
 //         author: username,
 //         message: currentMessage,
-//         time:
-//           new Date(Date.now()).getHours() +
-//           ':' +
-//           new Date(Date.now()).getMinutes(),
+//         time: new Date().toLocaleTimeString([], {
+//           hour: '2-digit',
+//           minute: '2-digit',
+//         }),
 //       };
 
 //       await socket.emit('send_message', messageData);
@@ -106,9 +105,15 @@ export default Chat;
 //   };
 
 //   useEffect(() => {
-//     socket.on('receive_message', (data) => {
+//     const handleReceiveMessage = (data) => {
 //       setMessageList((list) => [...list, data]);
-//     });
+//     };
+
+//     socket.on('receive_message', handleReceiveMessage);
+
+//     return () => {
+//       socket.off('receive_message', handleReceiveMessage);
+//     };
 //   }, [socket]);
 
 //   return (
@@ -118,24 +123,23 @@ export default Chat;
 //       </div>
 //       <div className="chat-body">
 //         <ScrollToBottom className="message-container">
-//           {messageList.map((messageContent) => {
-//             return (
-//               <div
-//                 className="message"
-//                 id={username === messageContent.author ? 'you' : 'other'}
-//               >
-//                 <div>
-//                   <div className="message-content">
-//                     <p>{messageContent.message}</p>
-//                   </div>
-//                   <div className="message-meta">
-//                     <p id="time">{messageContent.time}</p>
-//                     <p id="author">{messageContent.author}</p>
-//                   </div>
+//           {messageList.map((messageContent, index) => (
+//             <div
+//               key={index}
+//               className="message"
+//               id={username === messageContent.author ? 'you' : 'other'}
+//             >
+//               <div>
+//                 <div className="message-content">
+//                   <p>{messageContent.message}</p>
+//                 </div>
+//                 <div className="message-meta">
+//                   <p id="time">{messageContent.time}</p>
+//                   <p id="author">{messageContent.author}</p>
 //                 </div>
 //               </div>
-//             );
-//           })}
+//             </div>
+//           ))}
 //         </ScrollToBottom>
 //       </div>
 //       <div className="chat-footer">
@@ -143,12 +147,8 @@ export default Chat;
 //           type="text"
 //           value={currentMessage}
 //           placeholder="Hey..."
-//           onChange={(event) => {
-//             setCurrentMessage(event.target.value);
-//           }}
-//           onKeyPress={(event) => {
-//             event.key === 'Enter' && sendMessage();
-//           }}
+//           onChange={(event) => setCurrentMessage(event.target.value)}
+//           onKeyPress={(event) => event.key === 'Enter' && sendMessage()}
 //         />
 //         <button onClick={sendMessage}>&#9658;</button>
 //       </div>
@@ -157,5 +157,3 @@ export default Chat;
 // }
 
 // export default Chat;
-
-

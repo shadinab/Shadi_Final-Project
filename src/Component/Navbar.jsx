@@ -1,8 +1,10 @@
-
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import { useGlobalSearchPage } from '../context/SearchPageContext';
 
 const Navbar = () => {
+  const { MyData } = useGlobalSearchPage();
+
   return (
     <nav className="navbar">
       <div className="leftContainer">
@@ -14,9 +16,11 @@ const Navbar = () => {
         <Link to="/" className="logoLink">
           <img src="/public/Navbar svg.png" alt="Logo" className="logo" />
         </Link>
-        <Link to="/LogOut" className="navLink">
-          Log Out
-        </Link>
+        {MyData && (
+          <Link to="/LogOut" className="navLink">
+            Log Out
+          </Link>
+        )}
       </div>
       <div className="rightContainer">
         {/* Search Button */}

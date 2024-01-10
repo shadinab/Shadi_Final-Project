@@ -4,16 +4,16 @@ import { useParams } from 'react-router-dom';
 import './UserProfile.css';
 // import Chat from '../Chat/Chat';
 import { Link } from 'react-router-dom';
+import { useGlobalSearchPage } from '../../context/SearchPageContext';
 
 const UserProfile = () => {
+  const { MyData } = useGlobalSearchPage();
   const [userData, setUserData] = useState(null);
   const { id } = useParams();
   const getUserSelectedData = JSON.parse(
     localStorage.getItem('selectedUserId')
   );
-  const tokenconnectionId = (
-    localStorage.getItem('tokenconnectionId')
-  );
+  const tokenconnectionId = localStorage.getItem('tokenconnectionId');
   console.log('tokenconnectionId.', tokenconnectionId);
 
   console.log('getUserSelectedData._id.', getUserSelectedData);
@@ -46,13 +46,20 @@ const UserProfile = () => {
           alt="Profile Background"
           className="background-image"
         />
-        {tokenconnectionId !== getUserSelectedData && (
+        {tokenconnectionId !== getUserSelectedData && MyData && (
           <Link to={`/${getUserSelectedData}/chat`}>
             <button className="center">
               Send a Message To {userData.name}
             </button>
           </Link>
         )}
+        {/* {tokenconnectionId !== getUserSelectedData && if (!MyData)  (
+          <Link to={`/${getUserSelectedData}/chat`}>
+            <button className="center">
+              Send a Message To {userData.name}
+            </button>
+          </Link>
+        )} */}
       </div>
       <div className="user-details">
         <img
@@ -111,7 +118,6 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
-
 // import { useState, useEffect } from 'react';
 // import axios from 'axios';
 // import { useParams } from 'react-router-dom';
@@ -125,6 +131,11 @@ export default UserProfile;
 //   const getUserSelectedData = JSON.parse(
 //     localStorage.getItem('selectedUserId')
 //   );
+//   const tokenconnectionId = (
+//     localStorage.getItem('tokenconnectionId')
+//   );
+//   console.log('tokenconnectionId.', tokenconnectionId);
+
 //   console.log('getUserSelectedData._id.', getUserSelectedData);
 //   useEffect(() => {
 //     const fetchUserData = async () => {
@@ -155,11 +166,13 @@ export default UserProfile;
 //           alt="Profile Background"
 //           className="background-image"
 //         />
-//         <Link to={`/${getUserSelectedData}/chat`}>
-//           <button className="center">
-//            Send a Message To {userData.name}
-//           </button>
-//         </Link>
+//         {tokenconnectionId !== getUserSelectedData && (
+//           <Link to={`/${getUserSelectedData}/chat`}>
+//             <button className="center">
+//               Send a Message To {userData.name}
+//             </button>
+//           </Link>
+//         )}
 //       </div>
 //       <div className="user-details">
 //         <img
