@@ -94,3 +94,17 @@ export const MyProfileConnectionId = async (userData) => {
     throw error;
   }
 };
+
+
+// chat-----------------------
+
+export const sendMessage = async (messageData) => {
+  try {
+    const response = await apiService.post('/messages', messageData);
+    console.log('Message saved to MongoDB');
+    return response.data;
+  } catch (error) {
+    console.error('Error saving message to MongoDB:', error.message);
+    throw error;
+  }
+};
