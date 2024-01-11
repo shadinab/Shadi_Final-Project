@@ -46,7 +46,8 @@ const UserProfile = () => {
           alt="Profile Background"
           className="background-image"
         />
-        {tokenconnectionId !== getUserSelectedData && MyData && (
+        {/* tokenconnectionId !== getUserSelectedData && */}
+        {MyData && (
           <Link to={`/${getUserSelectedData}/chat`}>
             <button className="center">
               Send a Message To {userData.name}
