@@ -37,6 +37,26 @@ export const updateUser = async (userData) => {
   }
 };
 
+
+
+export const MyProfileUpdateUser = async (userData) => {
+  try {
+    const tokenconnectionId = localStorage.getItem('tokenconnectionId');
+    console.log('Stored Connection ID:', tokenconnectionId);
+    console.log('Update User Data:', userData);
+    const response = await apiService.put(
+      `/users/${tokenconnectionId}`,
+      userData
+    );
+    console.log('updateUser Response:', response.data); // Log response to console
+    return response.data;
+  } catch (error) {
+    console.error('updateUser Error:', error); // Log error to console
+    throw error; // Rethrow the error
+  }
+};
+
+
 export const createSignUpUser = async (userData) => {
   try {
     const response = await apiService.post('/auth/register', userData);

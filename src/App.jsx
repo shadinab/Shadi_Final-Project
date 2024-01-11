@@ -18,34 +18,34 @@ import LogOut from '../src/Pages/LogOut/LogOut'
 function App() {
   return (
     <>
-      {/* <UserProvider> */}
-      <SearchPageProvider>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/MyProfile" element={<MyProfile />} />
-            <Route path="/" element={<HomePage />} />
+        {/* <UserProvider> */}
+        <SearchPageProvider>
+          <Router>
+            <Navbar />
+            <Routes>
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/MyProfile" element={<MyProfile />} />
+              <Route path="/" element={<HomePage />} />
 
-            <Route path="/SignUp" element={<SignUp />} />
-            <Route
-              path="/SignUp/CreateAccount/AcoountDetails/interests"
-              element={<InterestsPage />}
-            />
-            <Route path="/SignUp/CreateAccount" element={<CreateAccount />} />
-            <Route
-              path="/SignUp/CreateAccount/AcoountDetails"
-              element={<AcoountDetails />}
-            />
+              <Route path="/SignUp" element={<SignUp />} />
+              <Route
+                path="/SignUp/CreateAccount/AcoountDetails/interests"
+                element={<InterestsPage />}
+              />
+              <Route path="/SignUp/CreateAccount" element={<CreateAccount />} />
+              <Route
+                path="/SignUp/CreateAccount/AcoountDetails"
+                element={<AcoountDetails />}
+              />
 
-            <Route path="/LogIn" element={<LogIn />} />
-            <Route path="/LogOut" element={<LogOut />} />
+              <Route path="/LogIn" element={<LogIn />} />
+              <Route path="/LogOut" element={<LogOut />} />
 
-            <Route path="/:userId" element={<UserProfile />} />
-            <Route path="/:userId/chat" element={<Chat />} />
-          </Routes>
-        </Router>
-      </SearchPageProvider>
+              <Route path="/:userId" element={<UserProfile />} />
+              <Route path="/:userId/chat" element={<Chat />} />
+            </Routes>
+          </Router>
+        </SearchPageProvider>
       {/* </UserProvider> */}
     </>
   );

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Chat2 from './Chat2';
 import { useGlobalSearchPage } from '../../context/SearchPageContext';
 
+
 const socket = io.connect('http://localhost:5000');
 
 function Chat() {
@@ -11,18 +12,18 @@ function Chat() {
   const [username, setUsername] = useState('');
   const [room, setRoom] = useState('');
   const [showChat, setShowChat] = useState(false);
-
+ 
   useEffect(() => {
     // Retrieve selectedUserId from local storage on component mount
     const selectedUserId = localStorage.getItem('selectedUserId');
-    console.log(`selectedUserId=${selectedUserId}`);
-
-    if (MyData.name && selectedUserId) {
+ const cleanedUserId = selectedUserId.replace(/"/g, ''); // Remove double quotes
+ console.log(`selectedUserId=${cleanedUserId}`);
+    if (MyData.name && cleanedUserId) {
       // Automatically join the chat room
-      socket.emit('join_room', selectedUserId);
+      socket.emit('join_room', cleanedUserId);
       setShowChat(true);
       setUsername(MyData.name);
-      setRoom(selectedUserId);
+      setRoom(cleanedUserId);
       console.log(`username=${MyData.name}`);
     }
   }, [MyData.name]); // Ensure this effect runs only once on component mount
@@ -37,6 +38,51 @@ function Chat() {
 }
 
 export default Chat;
+
+
+
+
+// import './Chat.css';
+// import io from 'socket.io-client';
+// import { useState, useEffect } from 'react';
+// import Chat2 from './Chat2';
+// import { useGlobalSearchPage } from '../../context/SearchPageContext';
+
+// const socket = io.connect('http://localhost:5000');
+
+// function Chat() {
+//   const { MyData } = useGlobalSearchPage();
+//   const [username, setUsername] = useState('');
+//   const [room, setRoom] = useState('');
+//   const [showChat, setShowChat] = useState(false);
+
+//   useEffect(() => {
+//     // Retrieve selectedUserId from local storage on component mount
+//     const selectedUserId = localStorage.getItem('selectedUserId');
+//     console.log(`selectedUserId=${selectedUserId}`);
+
+//     if (MyData.name && selectedUserId) {
+//       // Automatically join the chat room
+//       socket.emit('join_room', selectedUserId);
+//       setShowChat(true);
+//       setUsername(MyData.name);
+//       setRoom(selectedUserId);
+//       console.log(`username=${MyData.name}`);
+//     }
+//   }, [MyData.name]); // Ensure this effect runs only once on component mount
+
+//   return (
+//     <div className="App">
+//       {showChat ? (
+//         <Chat2 socket={socket} username={username} room={room} />
+//       ) : null}
+//     </div>
+//   );
+// }
+
+// export default Chat;
+
+
 
 // ----------------------------------------------
 

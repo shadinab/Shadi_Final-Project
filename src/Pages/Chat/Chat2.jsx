@@ -1,8 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import ScrollToBottom from 'react-scroll-to-bottom';
+import axios from 'axios';
 
-function Chat({ socket, username, room }) {
+function Chat2({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
 
@@ -19,12 +19,31 @@ function Chat({ socket, username, room }) {
       };
 
       await socket.emit('send_message', messageData);
-      setMessageList((list) => [...list, messageData]);
       setCurrentMessage('');
     }
   };
 
   useEffect(() => {
+    const fetchChatHistory = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/chat/history/${room}`
+        );
+
+        console.log('Response:', response.data);
+
+        const data = response.data;
+
+        if (data && data.messages) {
+          setMessageList(data.messages);
+        }
+      } catch (error) {
+        console.error('Error fetching chat history:', error.response.data);
+      }
+    };
+
+    fetchChatHistory();
+
     const handleReceiveMessage = (data) => {
       setMessageList((list) => [...list, data]);
     };
@@ -34,7 +53,7 @@ function Chat({ socket, username, room }) {
     return () => {
       socket.off('receive_message', handleReceiveMessage);
     };
-  }, [socket]);
+  }, [socket, room, username]);
 
   return (
     <div className="chat-window">
@@ -76,8 +95,7 @@ function Chat({ socket, username, room }) {
   );
 }
 
-export default Chat;
-
+export default Chat2;
 
 // import { useEffect, useState } from 'react';
 // import ScrollToBottom from 'react-scroll-to-bottom';
@@ -99,7 +117,7 @@ export default Chat;
 //       };
 
 //       await socket.emit('send_message', messageData);
-//       setMessageList((list) => [...list, messageData]);
+//       // setMessageList((list) => [...list, messageData]);
 //       setCurrentMessage('');
 //     }
 //   };
