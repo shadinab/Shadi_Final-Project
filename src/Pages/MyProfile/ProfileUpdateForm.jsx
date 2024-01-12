@@ -12,7 +12,7 @@ const ProfileUpdateForm = ({ onUpdate, onCancel, initialData }) => {
     background: initialData.background,
     interests: initialData.interests,
     photos: initialData.photos,
-    });
+  });
 
   // const handleChange = (e) => {
   //   const { name, value } = e.target;
@@ -22,21 +22,21 @@ const ProfileUpdateForm = ({ onUpdate, onCancel, initialData }) => {
   //   }));
   // };
 
-    const handleChange = (e, index) => {
-      const { name, value } = e.target;
-      setFormData((prevData) => {
-        const updatedPhotos = [...prevData.photos];
-        updatedPhotos[index] = value;
-        return {
-          ...prevData,
-          [name]:
-            name === 'interests'
-              ? value.split(',').map((item) => item.trim())
-              : value,
-          photos: updatedPhotos,
-        };
-      });
-    };
+  const handleChange = (e, index) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => {
+      const updatedPhotos = [...prevData.photos];
+      updatedPhotos[index] = value;
+      return {
+        ...prevData,
+        [name]:
+          name === 'interests'
+            ? value.split(',').map((item) => item.trim())
+            : value,
+        photos: updatedPhotos,
+      };
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -153,7 +153,6 @@ const ProfileUpdateForm = ({ onUpdate, onCancel, initialData }) => {
 };
 
 export default ProfileUpdateForm;
-
 
 // ProfileUpdateForm.js
 // import { useState } from 'react';

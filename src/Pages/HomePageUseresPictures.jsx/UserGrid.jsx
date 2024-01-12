@@ -8,6 +8,7 @@ const UserGrid = () => {
   const [imagesPerRow, setImagesPerRow] = useState(5);
   const [selectedUser, setSelectedUser] = useState(null);
 
+   
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -43,6 +44,11 @@ const UserGrid = () => {
     localStorage.setItem('selectedUserId', JSON.stringify(user.connectionId));
     setSelectedUser(user);
   };
+const formatBirthday = (user) => {
+  const originalDateString = user.birthday;
+  const dateObject = new Date(originalDateString);
+  return dateObject.toISOString().split('T')[0];
+};
 
   return (
     <div className="user-grid">
@@ -54,7 +60,8 @@ const UserGrid = () => {
           >
             <Link key={user.connectionId} to={`/${user.connectionId}`}>
               <img src={user.avatar} alt={user.name} className="user-picture" />
-              <div>{user.name}</div>
+              <div className="font">{user.name}</div>
+              <div className="font">{formatBirthday(user)}</div>{' '}
             </Link>
           </button>
         </div>
@@ -63,11 +70,7 @@ const UserGrid = () => {
   );
 };
 
-export default UserGrid;
-
-
-
-
+// export default UserGrid;
 // import { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 // import axios from 'axios';
@@ -78,6 +81,7 @@ export default UserGrid;
 //   const [imagesPerRow, setImagesPerRow] = useState(5);
 //   const [selectedUser, setSelectedUser] = useState(null);
 
+   
 //   useEffect(() => {
 //     const fetchData = async () => {
 //       try {
@@ -108,11 +112,16 @@ export default UserGrid;
 //     };
 //   }, []);
 
-//   const getUserInformations = (userId) => {
-//     console.log('User ID:', userId._id);
-//     localStorage.setItem('selectedUserId', JSON.stringify(userId._id));
-//     setSelectedUser(userId);
+//   const getUserInformations = (user) => {
+//     console.log('User Connection ID:', user.connectionId);
+//     localStorage.setItem('selectedUserId', JSON.stringify(user.connectionId));
+//     setSelectedUser(user);
 //   };
+// const formatBirthday = (user) => {
+//   const originalDateString = user.birthday;
+//   const dateObject = new Date(originalDateString);
+//   return dateObject.toISOString().split('T')[0];
+// };
 
 //   return (
 //     <div className="user-grid">
@@ -122,8 +131,10 @@ export default UserGrid;
 //             className="makeitinsideimage"
 //             onClick={() => getUserInformations(user)}
 //           >
-//             <Link key={user._id} to={`/${user._id}`}>
+//             <Link key={user.connectionId} to={`/${user.connectionId}`}>
 //               <img src={user.avatar} alt={user.name} className="user-picture" />
+//               <div className="font">{user.name}</div>
+//               <div className="font">{formatBirthday(user)}</div>{' '}
 //             </Link>
 //           </button>
 //         </div>

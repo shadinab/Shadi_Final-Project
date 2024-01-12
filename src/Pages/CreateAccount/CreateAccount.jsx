@@ -10,6 +10,7 @@ const CreateAccount = () => {
     gender: '',
     liveIn: '',
     connectionId: '',
+    birthday: '',
     // Correct the property name
   });
 
@@ -65,14 +66,14 @@ const CreateAccount = () => {
           <option value="female">Female</option>
         </select>
 
-        {/* <label htmlFor="birthday">Birthday:</label>
+        <label htmlFor="birthday">Birthday:</label>
         <input
           type="date"
           id="birthday"
           name="birthday"
           value={userData.birthday}
           onChange={handleChange}
-        /> */}
+        />
 
         <label htmlFor="liveIn">liveIn:</label>
         <input

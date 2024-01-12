@@ -3,6 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  
 }
 
 .user-item {
@@ -46,3 +47,14 @@
   }
 }
 
+.font {
+  font-size: large;
+  color: red;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+}
+
+.font:hover {
+  /* Add hover styles if you want */
+  text-decoration: underline; /* For example, underline on hover */
+}
