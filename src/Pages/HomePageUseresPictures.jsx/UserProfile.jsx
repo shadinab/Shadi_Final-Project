@@ -1,38 +1,72 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+// import { useParams } from '/react-router-dom';
 import './UserProfile.css';
 // import Chat from '../Chat/Chat';
 import { Link } from 'react-router-dom';
 import { useGlobalSearchPage } from '../../context/SearchPageContext';
 
 const UserProfile = () => {
+  console.log('hi');
+  const location = useLocation();
   const { MyData } = useGlobalSearchPage();
   const [userData, setUserData] = useState(null);
-  const { id } = useParams();
+  // const { id } = useParams();
   const getUserSelectedData = JSON.parse(
     localStorage.getItem('selectedUserId')
   );
   const tokenconnectionId = localStorage.getItem('tokenconnectionId');
   console.log('tokenconnectionId.', tokenconnectionId);
-
+  var pathname = location.pathname;
+  var parts = pathname.split('/');
+  var id = parts[parts.length - 1];
+  console.log('Original Path:', pathname);
+  console.log('c ID:', id);
   console.log('getUserSelectedData._id.', getUserSelectedData);
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `http://localhost:5000/api/usersById/${id}`
+  //       );
+  //       const response = await axios.get(
+  //         `http://localhost:5000/api/users/${getUserSelectedData}`
+  //       );
+  //       console.log('Response:', response.data);
+  //       setUserData(response.data.data);
+  //     } catch (error) {
+  //       console.error('Error fetching user data:', error.message);
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, [id]); // Add 'id' as a dependency
+  const fetchUserData = async () => {
+    try {
+      if (pathname.includes('/search/')) {
+        // If 'id' is available, fetch data by ID
+        const response = await axios.get(
+          `http://localhost:5000/api/usersById/${id}`
+        );
+        console.log('User by ID Response:', response.data);
+        setUserData(response.data.data);
+      } else if (getUserSelectedData) {
+        // If 'getUserSelectedData' is available, fetch data using it
         const response = await axios.get(
           `http://localhost:5000/api/users/${getUserSelectedData}`
         );
-        console.log('Response:', response.data);
+        console.log('User Response:', response.data);
         setUserData(response.data.data);
-      } catch (error) {
-        console.error('Error fetching user data:', error.message);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching user data:', error.message);
+    }
+  };
 
+  useEffect(() => {
     fetchUserData();
-  }, [id]); // Add 'id' as a dependency
-
+  }, [id, getUserSelectedData]); // Add
   if (!userData) {
     // Show a loading indicator or message while data is being fetched
     return <p>Loading...</p>;

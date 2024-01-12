@@ -31,7 +31,7 @@ function Chat2({ socket, username, room }) {
         );
 
         console.log('Response:', response.data);
-
+          console.log("responseHistoy");
         const data = response.data;
 
         if (data && data.messages) {

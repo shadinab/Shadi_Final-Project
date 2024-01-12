@@ -1,14 +1,10 @@
-
-
 import './SearchPage.css';
 import axios from 'axios';
 import { useGlobalSearchPage } from '../../context/SearchPageContext';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const SearchPage = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const {
     gender,
     setGender,
@@ -36,27 +32,26 @@ const SearchPage = () => {
           ? user.details.liveIn === country
           : true;
 
-          const userMinAge = parseInt(
-            user.preferences.ageRange.split('-')[0],
-            10
-          );
-          const userMaxAge = parseInt(
-            user.preferences.ageRange.split('-')[1],
-            10
-          );
+        const userMinAge = parseInt(
+          user.preferences.ageRange.split('-')[0],
+          10
+        );
+        const userMaxAge = parseInt(
+          user.preferences.ageRange.split('-')[1],
+          10
+        );
 
-const meetsAgeRangeCriteria = userMinAge >= minAge && userMaxAge <= maxAge;
-
+        const meetsAgeRangeCriteria =
+          userMinAge >= minAge && userMaxAge <= maxAge;
 
         const meetsGenderCriteria = user.preferences.gender === gender;
 
-                                            console.log(meetsGenderCriteria);
+        console.log(meetsGenderCriteria);
 
         return (
           meetsCountryCriteria && meetsAgeRangeCriteria && meetsGenderCriteria
         );
       });
-
 
       // Update the state with the filtered users
       setSearchResults(filteredUsers);
@@ -67,11 +62,10 @@ const meetsAgeRangeCriteria = userMinAge >= minAge && userMaxAge <= maxAge;
 
   const navigateToUserProfile = (userId) => {
     // Redirect to the UserProfile page with the user's ID
- localStorage.setItem('selectedUserId', JSON.stringify(userId._id));
- console.log(userId._id);
-  navigate(`/${userId._id}`);
+    console.log(`searchUserId----${userId}`);
+    navigate(`/search/${userId}`);
   };
-
+console.log('searchResults', searchResults);
   return (
     <div className="search-container">
       <h2>Find Your Match</h2>
@@ -127,7 +121,7 @@ const meetsAgeRangeCriteria = userMinAge >= minAge && userMaxAge <= maxAge;
       {searchResults.length > 0 ? (
         <ul>
           {searchResults.map((user) => (
-            <li key={user._id} onClick={() => navigateToUserProfile(user)}>
+            <li key={user._id} onClick={() => navigateToUserProfile(user._id)}>
               <div>
                 <img src={user.avatar} alt={`Avatar of ${user.name}`} />
               </div>
@@ -162,12 +156,15 @@ export default SearchPage;
 
 
 
+
+
+
+
+
 // import './SearchPage.css';
 // import axios from 'axios';
 // import { useGlobalSearchPage } from '../../context/SearchPageContext';
 // import { useNavigate } from 'react-router-dom';
-
-
 
 // const SearchPage = () => {
 //     const navigate = useNavigate();
@@ -209,7 +206,6 @@ export default SearchPage;
 
 // const meetsAgeRangeCriteria = userMinAge >= minAge && userMaxAge <= maxAge;
 
-
 //         const meetsGenderCriteria = user.preferences.gender === gender;
 
 //                                             console.log(meetsGenderCriteria);
@@ -218,7 +214,6 @@ export default SearchPage;
 //           meetsCountryCriteria && meetsAgeRangeCriteria && meetsGenderCriteria
 //         );
 //       });
-
 
 //       // Update the state with the filtered users
 //       setSearchResults(filteredUsers);
@@ -229,9 +224,8 @@ export default SearchPage;
 
 //   const navigateToUserProfile = (userId) => {
 //     // Redirect to the UserProfile page with the user's ID
-//  localStorage.setItem('selectedUserId', JSON.stringify(userId._id));
-//  console.log(userId._id);
-//   navigate(`/${userId._id}`);
+//     console.log(`searchUserId----${userId}`);
+//     navigate(`/${userId}`);
 //   };
 
 //   return (
@@ -289,7 +283,7 @@ export default SearchPage;
 //       {searchResults.length > 0 ? (
 //         <ul>
 //           {searchResults.map((user) => (
-//             <li key={user._id} onClick={() => navigateToUserProfile(user)}>
+//             <li key={user._id} onClick={() => navigateToUserProfile(user._id)}>
 //               <div>
 //                 <img src={user.avatar} alt={`Avatar of ${user.name}`} />
 //               </div>
@@ -315,10 +309,3 @@ export default SearchPage;
 // };
 
 // export default SearchPage;
-
-
-
-
-
-
-
