@@ -58,6 +58,8 @@ const navigate = useNavigate();
         name: updatedData.name,
         description: updatedData.description,
         background: updatedData.background,
+        interests: updatedData.interests,
+        photos: updatedData.photos,
       });
 
       setMyData(updatedProfile);
@@ -116,6 +118,13 @@ const navigate = useNavigate();
                 </div>
               ))}
             </div>
+            <div>
+              <h2>My interest</h2>
+              <div className="user-description">
+                {MyData.interests.join(', ')}
+              </div>
+            </div>
+
             <div className="user-additional-info">
               {MyData.preferences && (
                 <>
@@ -155,7 +164,8 @@ const navigate = useNavigate();
 
 export default MyProfile;
 
-// // MyProfile.js
+
+// MyProfile.js
 // import  { useEffect, useState } from 'react';
 // import './MyProfile.css';
 // import { useGlobalSearchPage } from '../../context/SearchPageContext';
@@ -215,6 +225,8 @@ export default MyProfile;
 //         name: updatedData.name,
 //         description: updatedData.description,
 //         background: updatedData.background,
+//         interests: updatedData.interests,
+//         photos: updatedData.photos,
 //       });
 
 //       setMyData(updatedProfile);
@@ -273,6 +285,13 @@ export default MyProfile;
 //                 </div>
 //               ))}
 //             </div>
+//             <div>
+//               <h2>My interest</h2>
+//               <div className="user-description">
+//                 {MyData.interests.join(', ')}
+//               </div>
+//             </div>
+
 //             <div className="user-additional-info">
 //               {MyData.preferences && (
 //                 <>
@@ -311,4 +330,3 @@ export default MyProfile;
 // };
 
 // export default MyProfile;
-
