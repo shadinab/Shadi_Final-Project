@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react';
-// import axios from 'axios';
+// MyProfile.js
+import  { useEffect, useState } from 'react';
 import './MyProfile.css';
-import {useGlobalSearchPage} from '../../context/SearchPageContext'
+import { useGlobalSearchPage } from '../../context/SearchPageContext';
 import {
   MyProfileConnectionId,
   MyProfileUpdateUser,
 } from '../../api/apiService';
+import ProfileUpdateForm from './ProfileUpdateForm';
+import { useNavigate } from 'react-router-dom';
+
 
 const MyProfile = () => {
   const { MyData, setMyData } = useGlobalSearchPage();
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedProfileData, setEditedProfileData] = useState({ ...MyData });
-
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+const navigate = useNavigate();
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -19,7 +22,7 @@ const MyProfile = () => {
         console.log(`myprofileresponse- ${JSON.stringify(response)}`);
 
         if (response.success) {
-          const profileData = response.data; // Assuming response.data is already a JSON object
+          const profileData = response.data;
           setMyData(profileData);
           console.log(profileData);
         } else {
@@ -31,32 +34,46 @@ const MyProfile = () => {
     };
 
     fetchProfileData();
-  }, []);
+  }, [MyData, setMyData]);
 
-   const handleEditClick = () => {
-     setIsEditing(true);
-   };
+  const handleUpdateClick = () => {
+    setIsEditMode(true);
+  };
 
-   const handleSaveClick = async () => {
-     try {
-       const response = await MyProfileUpdateUser(editedProfileData);
-       console.log(`saveProfileChanges response - ${JSON.stringify(response)}`);
+  const handleUpdateFormSubmit = async (updatedData) => {
+    try {
+      setIsUpdating(true);
+      const updatedProfile = await MyProfileUpdateUser({
+        ...MyData,
+        details: {
+          ...MyData.details,
+          workAs: updatedData.workAs,
+          education: updatedData.education,
+        },
+        preferences: {
+          ...MyData.preferences,
+          ageRange: updatedData.ageRange,
+        },
+        avatar: updatedData.avatar,
+        name: updatedData.name,
+        description: updatedData.description,
+        background: updatedData.background,
+      });
 
-       if (response.success) {
-         setMyData(editedProfileData);
-         setIsEditing(false);
-       } else {
-         console.error('Error saving profile changes:', response.error);
-       }
-     } catch (error) {
-       console.error('Error saving profile changes:', error.message);
-     }
-   };
+      setMyData(updatedProfile);
+      setIsEditMode(false);
+      console.log('Update successful:', updatedProfile);
+            navigate('/');
+    } catch (error) {
+      console.error('Update failed:', error);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
 
-   const handleCancelClick = () => {
-     setIsEditing(false);
-     setEditedProfileData({ ...MyData });
-   };
+  const handleUpdateFormCancel = () => {
+    setIsEditMode(false);
+  };
 
   if (!MyData) {
     return (
@@ -65,6 +82,7 @@ const MyProfile = () => {
       </div>
     );
   }
+
   return (
     <div className="user-profile">
       <div className="profile-background">
@@ -80,104 +98,56 @@ const MyProfile = () => {
           alt={MyData.name}
           className="user-picture-large"
         />
-        <div>
-          <h2>{MyData.name}</h2>
-          <div className="user-description">{MyData.description}</div>
-        </div>
-        <div className="user-description">
-          {Object.entries(
-            isEditing ? editedProfileData.details : MyData.details
-          ).map(([key, value]) => (
-            <div key={key}>
-              <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
-              {isEditing ? (
-                <input
-                  type="text"
-                  value={value}
-                  onChange={(e) =>
-                    setEditedProfileData({
-                      ...editedProfileData,
-                      details: {
-                        ...editedProfileData.details,
-                        [key]: e.target.value,
-                      },
-                    })
-                  }
-                />
-              ) : (
-                value
-              )}
+        {isEditMode ? (
+          <ProfileUpdateForm
+            onUpdate={handleUpdateFormSubmit}
+            onCancel={handleUpdateFormCancel}
+            initialData={MyData}
+          />
+        ) : (
+          <>
+            <h2>{MyData.name}</h2>
+            <div className="user-description">{MyData.description}</div>
+            <div className="user-description">
+              {Object.entries(MyData.details).map(([key, value]) => (
+                <div key={key}>
+                  <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
+                  {value}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className="user-additional-info">
-          {isEditing ? (
-            <>
-              <h3>Looking For</h3>
-              <label>
-                Gender:
-                <input
-                  type="text"
-                  value={editedProfileData.preferences.gender}
-                  onChange={(e) =>
-                    setEditedProfileData({
-                      ...editedProfileData,
-                      preferences: {
-                        ...editedProfileData.preferences,
-                        gender: e.target.value,
-                      },
-                    })
-                  }
-                />
-              </label>
-              <label>
-                Age Range:
-                <input
-                  type="text"
-                  value={editedProfileData.preferences.ageRange}
-                  onChange={(e) =>
-                    setEditedProfileData({
-                      ...editedProfileData,
-                      preferences: {
-                        ...editedProfileData.preferences,
-                        ageRange: e.target.value,
-                      },
-                    })
-                  }
-                />
-              </label>
-              {/* ... (other preferences editing) */}
-              <button onClick={handleSaveClick}>Save</button>
-              <button onClick={handleCancelClick}>Cancel</button>
-            </>
-          ) : (
-            <>
+            <div className="user-additional-info">
               {MyData.preferences && (
                 <>
                   <h3>Looking For</h3>
                   <p className="user-description">
                     {MyData.preferences.gender}, {MyData.preferences.ageRange}
                   </p>
-                  {/* ... (other preferences rendering) */}
                 </>
               )}
-              <button onClick={handleEditClick}>Edit Profile</button>
-            </>
-          )}
-        </div>
-        <div className="user-photos">
-          <h3>User Photos</h3>
-          <div className="photos-container">
-            {MyData.photos.map((photo, index) => (
-              <img
-                key={index}
-                src={photo}
-                alt={`Photo ${index + 1}`}
-                className="user-photo"
-              />
-            ))}
-          </div>
-        </div>
+            </div>
+            <div className="user-photos">
+              <h3>User Photos</h3>
+              <div className="photos-container">
+                {MyData.photos.map((photo, index) => (
+                  <img
+                    key={index}
+                    src={photo}
+                    alt={`Photo ${index + 1}`}
+                    className="user-photo"
+                  />
+                ))}
+              </div>
+            </div>
+            <button
+              className="update-button top"
+              onClick={handleUpdateClick}
+              disabled={isUpdating}
+            >
+              {isUpdating ? 'Updating...' : 'Update Profile'}
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
@@ -185,22 +155,23 @@ const MyProfile = () => {
 
 export default MyProfile;
 
-
-
-// import { useEffect, useState } from 'react';
-// // import axios from 'axios';
+// // MyProfile.js
+// import  { useEffect, useState } from 'react';
 // import './MyProfile.css';
-// import {useGlobalSearchPage} from '../../context/SearchPageContext'
+// import { useGlobalSearchPage } from '../../context/SearchPageContext';
 // import {
 //   MyProfileConnectionId,
 //   MyProfileUpdateUser,
 // } from '../../api/apiService';
+// import ProfileUpdateForm from './ProfileUpdateForm';
+// import { useNavigate } from 'react-router-dom';
+
 
 // const MyProfile = () => {
 //   const { MyData, setMyData } = useGlobalSearchPage();
-//   const [isEditing, setIsEditing] = useState(false);
-//   const [editedProfileData, setEditedProfileData] = useState({ ...MyData });
-
+//   const [isUpdating, setIsUpdating] = useState(false);
+//   const [isEditMode, setIsEditMode] = useState(false);
+// const navigate = useNavigate();
 //   useEffect(() => {
 //     const fetchProfileData = async () => {
 //       try {
@@ -208,7 +179,7 @@ export default MyProfile;
 //         console.log(`myprofileresponse- ${JSON.stringify(response)}`);
 
 //         if (response.success) {
-//           const profileData = response.data; // Assuming response.data is already a JSON object
+//           const profileData = response.data;
 //           setMyData(profileData);
 //           console.log(profileData);
 //         } else {
@@ -220,32 +191,46 @@ export default MyProfile;
 //     };
 
 //     fetchProfileData();
-//   }, []);
+//   }, [MyData, setMyData]);
 
-//    const handleEditClick = () => {
-//      setIsEditing(true);
-//    };
+//   const handleUpdateClick = () => {
+//     setIsEditMode(true);
+//   };
 
-//    const handleSaveClick = async () => {
-//      try {
-//        const response = await MyProfileUpdateUser(editedProfileData);
-//        console.log(`saveProfileChanges response - ${JSON.stringify(response)}`);
+//   const handleUpdateFormSubmit = async (updatedData) => {
+//     try {
+//       setIsUpdating(true);
+//       const updatedProfile = await MyProfileUpdateUser({
+//         ...MyData,
+//         details: {
+//           ...MyData.details,
+//           workAs: updatedData.workAs,
+//           education: updatedData.education,
+//         },
+//         preferences: {
+//           ...MyData.preferences,
+//           ageRange: updatedData.ageRange,
+//         },
+//         avatar: updatedData.avatar,
+//         name: updatedData.name,
+//         description: updatedData.description,
+//         background: updatedData.background,
+//       });
 
-//        if (response.success) {
-//          setMyData(editedProfileData);
-//          setIsEditing(false);
-//        } else {
-//          console.error('Error saving profile changes:', response.error);
-//        }
-//      } catch (error) {
-//        console.error('Error saving profile changes:', error.message);
-//      }
-//    };
+//       setMyData(updatedProfile);
+//       setIsEditMode(false);
+//       console.log('Update successful:', updatedProfile);
+//             navigate('/');
+//     } catch (error) {
+//       console.error('Update failed:', error);
+//     } finally {
+//       setIsUpdating(false);
+//     }
+//   };
 
-//    const handleCancelClick = () => {
-//      setIsEditing(false);
-//      setEditedProfileData({ ...MyData });
-//    };
+//   const handleUpdateFormCancel = () => {
+//     setIsEditMode(false);
+//   };
 
 //   if (!MyData) {
 //     return (
@@ -254,6 +239,7 @@ export default MyProfile;
 //       </div>
 //     );
 //   }
+
 //   return (
 //     <div className="user-profile">
 //       <div className="profile-background">
@@ -269,202 +255,60 @@ export default MyProfile;
 //           alt={MyData.name}
 //           className="user-picture-large"
 //         />
-//         <div>
-//           <h2>{MyData.name}</h2>
-//           <div className="user-description">{MyData.description}</div>
-//         </div>
-//         <div className="user-description">
-//           {Object.entries(
-//             isEditing ? editedProfileData.details : MyData.details
-//           ).map(([key, value]) => (
-//             <div key={key}>
-//               <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
-//               {isEditing ? (
-//                 <input
-//                   type="text"
-//                   value={value}
-//                   onChange={(e) =>
-//                     setEditedProfileData({
-//                       ...editedProfileData,
-//                       details: {
-//                         ...editedProfileData.details,
-//                         [key]: e.target.value,
-//                       },
-//                     })
-//                   }
-//                 />
-//               ) : (
-//                 value
-//               )}
+//         {isEditMode ? (
+//           <ProfileUpdateForm
+//             onUpdate={handleUpdateFormSubmit}
+//             onCancel={handleUpdateFormCancel}
+//             initialData={MyData}
+//           />
+//         ) : (
+//           <>
+//             <h2>{MyData.name}</h2>
+//             <div className="user-description">{MyData.description}</div>
+//             <div className="user-description">
+//               {Object.entries(MyData.details).map(([key, value]) => (
+//                 <div key={key}>
+//                   <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
+//                   {value}
+//                 </div>
+//               ))}
 //             </div>
-//           ))}
-//         </div>
-//         <div className="user-additional-info">
-//           {isEditing ? (
-//             <>
-//               <h3>Looking For</h3>
-//               <label>
-//                 Gender:
-//                 <input
-//                   type="text"
-//                   value={editedProfileData.preferences.gender}
-//                   onChange={(e) =>
-//                     setEditedProfileData({
-//                       ...editedProfileData,
-//                       preferences: {
-//                         ...editedProfileData.preferences,
-//                         gender: e.target.value,
-//                       },
-//                     })
-//                   }
-//                 />
-//               </label>
-//               <label>
-//                 Age Range:
-//                 <input
-//                   type="text"
-//                   value={editedProfileData.preferences.ageRange}
-//                   onChange={(e) =>
-//                     setEditedProfileData({
-//                       ...editedProfileData,
-//                       preferences: {
-//                         ...editedProfileData.preferences,
-//                         ageRange: e.target.value,
-//                       },
-//                     })
-//                   }
-//                 />
-//               </label>
-//               {/* ... (other preferences editing) */}
-//               <button onClick={handleSaveClick}>Save</button>
-//               <button onClick={handleCancelClick}>Cancel</button>
-//             </>
-//           ) : (
-//             <>
+//             <div className="user-additional-info">
 //               {MyData.preferences && (
 //                 <>
 //                   <h3>Looking For</h3>
 //                   <p className="user-description">
 //                     {MyData.preferences.gender}, {MyData.preferences.ageRange}
 //                   </p>
-//                   {/* ... (other preferences rendering) */}
 //                 </>
 //               )}
-//               <button onClick={handleEditClick}>Edit Profile</button>
-//             </>
-//           )}
-//         </div>
-//         <div className="user-photos">
-//           <h3>User Photos</h3>
-//           <div className="photos-container">
-//             {MyData.photos.map((photo, index) => (
-//               <img
-//                 key={index}
-//                 src={photo}
-//                 alt={`Photo ${index + 1}`}
-//                 className="user-photo"
-//               />
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default MyProfile;
-
-// import { useEffect } from 'react';
-// // import axios from 'axios';
-// import './MyProfile.css';
-// import {useGlobalSearchPage} from '../../context/SearchPageContext'
-// import { MyProfileConnectionId } from '../../api/apiService';
-// // import { useUser } from '../../context/UserContext';
-
-// const MyProfile = () => {
-//   const { MyData, setMyData } = useGlobalSearchPage();
-//  useEffect(() => {
-//    const fetchProfileData = async () => {
-//      try {
-//        const response = await MyProfileConnectionId(MyData);
-//        console.log(`myprofileresponse- ${JSON.stringify(response)}`);
-
-//        if (response.success) {
-//          const profileData = response.data; // Assuming response.data is already a JSON object
-//          setMyData(profileData);
-//          console.log(profileData);
-//        } else {
-//          console.error('Error fetching profile data:', response.error);
-//        }
-//      } catch (error) {
-//        console.error('Error fetching profile data:', error.message);
-//      }
-//    };
-
-//    fetchProfileData();
-//  }, []);
-
-// if (!MyData) {
-//   return (
-//     <div className="center-container">
-//       <p className="login-message">Please Log In....</p>
-//     </div>
-//   );
-// }
-//   return (
-//     <div className="user-profile">
-//       <div className="profile-background">
-//         <img
-//           src={MyData.background}
-//           alt="Profile Background"
-//           className="background-image"
-//         />
-//       </div>
-//       <div className="user-details">
-//         <img
-//           src={MyData.avatar}
-//           alt={MyData.name}
-//           className="user-picture-large"
-//         />
-//         <div>
-//           <h2>{MyData.name}</h2>
-//           <div className="user-description">{MyData.description}</div>
-//         </div>
-//         <div className="user-description">
-//           {Object.entries(MyData.details).map(([key, value]) => (
-//             <div key={key}>
-//               <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
-//               {value}
 //             </div>
-//           ))}
-//         </div>
-//         <div className="user-additional-info">
-//           {MyData.preferences && (
-//             <>
-//               <h3>Looking For</h3>
-//               <p className="user-description">
-//                 {MyData.preferences.gender}, {MyData.preferences.ageRange}
-//               </p>
-//               {/* ... (other preferences rendering) */}
-//             </>
-//           )}
-//         </div>
-//         <div className="user-photos">
-//           <h3>User Photos</h3>
-//           <div className="photos-container">
-//             {MyData.photos.map((photo, index) => (
-//               <img
-//                 key={index}
-//                 src={photo}
-//                 alt={`Photo ${index + 1}`}
-//                 className="user-photo"
-//               />
-//             ))}
-//           </div>
-//         </div>
+//             <div className="user-photos">
+//               <h3>User Photos</h3>
+//               <div className="photos-container">
+//                 {MyData.photos.map((photo, index) => (
+//                   <img
+//                     key={index}
+//                     src={photo}
+//                     alt={`Photo ${index + 1}`}
+//                     className="user-photo"
+//                   />
+//                 ))}
+//               </div>
+//             </div>
+//             <button
+//               className="update-button top"
+//               onClick={handleUpdateClick}
+//               disabled={isUpdating}
+//             >
+//               {isUpdating ? 'Updating...' : 'Update Profile'}
+//             </button>
+//           </>
+//         )}
 //       </div>
 //     </div>
 //   );
 // };
 
 // export default MyProfile;
+

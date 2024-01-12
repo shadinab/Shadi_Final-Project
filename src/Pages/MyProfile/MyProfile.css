@@ -12,6 +12,10 @@
   height: 100vh; /* This ensures the container takes the full height of the viewport */
 }
 
+.top{
+  margin-top: 4rem;
+}
+
 .loading-message,
 .login-message {
   font-size: 50px;
