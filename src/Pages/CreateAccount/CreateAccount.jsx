@@ -7,8 +7,6 @@ const CreateAccount = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     name: '',
-    gender: '',
-    liveIn: '',
     connectionId: '',
     birthday: '',
     // Correct the property name
@@ -54,17 +52,6 @@ const CreateAccount = () => {
           onChange={handleChange}
         />
 
-        <label htmlFor="gender">Looking For:</label>
-        <select
-          id="gender"
-          name="gender"
-          value={userData.gender}
-          onChange={handleChange}
-        >
-          <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
 
         <label htmlFor="birthday">Birthday:</label>
         <input
@@ -74,15 +61,7 @@ const CreateAccount = () => {
           value={userData.birthday}
           onChange={handleChange}
         />
-
-        <label htmlFor="liveIn">liveIn:</label>
-        <input
-          type="text"
-          id="liveIn"
-          name="liveIn"
-          value={userData.liveIn}
-          onChange={handleChange}
-        />
+        
 
         <button onClick={handleNext}>Next</button>
       </div>
@@ -91,8 +70,6 @@ const CreateAccount = () => {
 };
 
 export default CreateAccount;
-
-
 
 
 // import { useState, useEffect } from 'react';
@@ -107,6 +84,7 @@ export default CreateAccount;
 //     gender: '',
 //     liveIn: '',
 //     connectionId: '',
+//     birthday: '',
 //     // Correct the property name
 //   });
 
@@ -150,7 +128,7 @@ export default CreateAccount;
 //           onChange={handleChange}
 //         />
 
-//         <label htmlFor="gender">Looking For:</label>
+//         <label htmlFor="gender">My Gender</label>
 //         <select
 //           id="gender"
 //           name="gender"
@@ -187,3 +165,4 @@ export default CreateAccount;
 // };
 
 // export default CreateAccount;
+

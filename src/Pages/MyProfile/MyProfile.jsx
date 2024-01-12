@@ -47,6 +47,7 @@ const navigate = useNavigate();
         ...MyData,
         details: {
           ...MyData.details,
+          liveIn:updatedData.liveIn,
           workAs: updatedData.workAs,
           education: updatedData.education,
         },

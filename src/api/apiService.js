@@ -85,6 +85,22 @@ export const myProfileConnectionId = async (userData) => {
 };
 
 
+export const GetmyDataAcoountDetails = async (userData) => {
+  try {
+    const storedConnectionId = localStorage.getItem('connectionId');
+    const response = await apiService.get(
+      `users/${storedConnectionId}`,
+      userData
+    );
+    console.log('myProfileConnectionId Response:', response.data); // Log response to console
+    return response.data;
+  } catch (error) {
+    console.error(' Error getting your profile data:', error); // Log error to console
+    throw error; // Rethrow the error
+  }
+};
+
+
 export const MyProfileConnectionId = async (userData) => {
   try {
  const tokenconnectionId = (

@@ -4,6 +4,7 @@ import { useState } from 'react';
 const ProfileUpdateForm = ({ onUpdate, onCancel, initialData }) => {
   const [formData, setFormData] = useState({
     avatar: initialData.avatar,
+    liveIn: initialData.details.liveIn,
     workAs: initialData.details.workAs,
     education: initialData.details.education,
     ageRange: initialData.preferences.ageRange,
@@ -69,6 +70,16 @@ const ProfileUpdateForm = ({ onUpdate, onCancel, initialData }) => {
           type="text"
           name="avatar"
           value={formData.avatar}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div>
+        <label>liveIn:</label>
+        <input
+          type="text"
+          name="liveIn"
+          value={formData.liveIn}
           onChange={handleChange}
         />
       </div>
