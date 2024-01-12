@@ -9,15 +9,23 @@ const InterestsPage = ({ userData }) => {
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [otherInterest, setOtherInterest] = useState('');
 
-  const handleInterestToggle = (interest) => {
-    setSelectedInterests((prevInterests) => {
-      if (prevInterests.includes(interest)) {
-        return prevInterests.filter((item) => item !== interest);
-      } else {
+const handleInterestToggle = (interest) => {
+  setSelectedInterests((prevInterests) => {
+    if (prevInterests.includes(interest)) {
+      if (interest === 'Other') {
+        // If 'Other' interest is unchecked, clear the otherInterest state
+        setOtherInterest('');
+      }
+      return prevInterests.filter((item) => item !== interest);
+    } else {
+      if (interest === 'Other') {
+        // If 'Other' interest is checked, set otherInterest as the default value or the user's input
         return [...prevInterests, interest];
       }
-    });
-  };
+      return [...prevInterests, interest];
+    }
+  });
+};
 
   const handleOtherInterestChange = (e) => {
     setOtherInterest(e.target.value);
@@ -25,11 +33,15 @@ const InterestsPage = ({ userData }) => {
 
  const handleFinish = async () => {
    try {
-     // Combine selected interests with the "Other" interest if provided
-     const response = await updateUser({
-       ...userData,
-       interests: selectedInterests,
-     });
+
+      const updatedUserData = {
+        ...userData,
+        interests: selectedInterests.includes('Other')
+          ? [...selectedInterests, otherInterest]
+          : selectedInterests,
+      };
+
+      const response = await updateUser(updatedUserData);
 
      if (response.success) {
        // Navigate or perform additional actions after successful user creation
@@ -116,42 +128,65 @@ export default InterestsPage;
 
 
 
-// // InterestsPage.jsx
+
+// InterestsPage.jsx
 // import { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import './InterestsPage.css';
+// import { updateUser } from '../../api/apiService';
 
 // const InterestsPage = ({ userData }) => {
 //   const navigate = useNavigate();
 //   const [selectedInterests, setSelectedInterests] = useState([]);
 //   const [otherInterest, setOtherInterest] = useState('');
 
-//   const handleInterestToggle = (interest) => {
-//     setSelectedInterests((prevInterests) => {
-//       if (prevInterests.includes(interest)) {
-//         return prevInterests.filter((item) => item !== interest);
-//       } else {
+// const handleInterestToggle = (interest) => {
+//   setSelectedInterests((prevInterests) => {
+//     if (prevInterests.includes(interest)) {
+//       if (interest === 'Other') {
+//         // If 'Other' interest is unchecked, clear the otherInterest state
+//         setOtherInterest('');
+//       }
+//       return prevInterests.filter((item) => item !== interest);
+//     } else {
+//       if (interest === 'Other') {
+//         // If 'Other' interest is checked, set otherInterest as the default value or the user's input
 //         return [...prevInterests, interest];
 //       }
-//     });
-//   };
+//       return [...prevInterests, interest];
+//     }
+//   });
+// };
 
 //   const handleOtherInterestChange = (e) => {
 //     setOtherInterest(e.target.value);
 //   };
 
-//   const handleFinish = () => {
-//     // Combine selected interests with the "Other" interest if provided
-//     const finalInterests = otherInterest
-//       ? [...selectedInterests, otherInterest]
-//       : selectedInterests;
+//  const handleFinish = async () => {
+//    try {
 
-//     // You can perform any action needed with the final interests
-//     console.log('Selected Interests:', finalInterests);
+//       const updatedUserData = {
+//         ...userData,
+//         interests: selectedInterests.includes('Other')
+//           ? [...selectedInterests, otherInterest]
+//           : selectedInterests,
+//       };
 
-//     // For now, let's navigate back to the home page
-//     navigate('/LogIn');
-//   };
+//       const response = await updateUser(updatedUserData);
+
+//      if (response.success) {
+//        // Navigate or perform additional actions after successful user creation
+//        navigate('/LogIn');
+//      } else {
+//        console.error('User creation failed:', response.error);
+//      }
+//    } catch (error) {
+//      console.error('An error occurred during user creation:', error.message);
+//    }
+//  };
+
+
+
 //    const onBack = () => {
 //      navigate('/SignUp/CreateAccount/AcoountDetails');
 //    };
@@ -221,3 +256,7 @@ export default InterestsPage;
 // };
 
 // export default InterestsPage;
+
+
+
+
