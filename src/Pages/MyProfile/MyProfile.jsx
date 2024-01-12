@@ -60,6 +60,7 @@ const navigate = useNavigate();
         description: updatedData.description,
         background: updatedData.background,
         interests: updatedData.interests,
+        lookingfor:updatedData.lookingfor,
         photos: updatedData.photos,
       });
 
@@ -131,7 +132,7 @@ const navigate = useNavigate();
                 <>
                   <h3>Looking For</h3>
                   <p className="user-description">
-                    {MyData.preferences.gender}, {MyData.preferences.ageRange}
+                    {MyData.lookingfor}, {MyData.preferences.ageRange}
                   </p>
                 </>
               )}

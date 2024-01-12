@@ -9,7 +9,7 @@ const CreateAccount = () => {
     name: '',
     connectionId: '',
     birthday: '',
-    // Correct the property name
+    lookingfor: '',
   });
 
   useEffect(() => {
@@ -51,7 +51,17 @@ const CreateAccount = () => {
           value={userData.name}
           onChange={handleChange}
         />
-
+        <label htmlFor="gender">looking for</label>
+        <select
+          id="gender"
+          name="lookingfor"
+          value={userData.lookingfor}
+          onChange={handleChange}
+        >
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
 
         <label htmlFor="birthday">Birthday:</label>
         <input
@@ -61,7 +71,6 @@ const CreateAccount = () => {
           value={userData.birthday}
           onChange={handleChange}
         />
-        
 
         <button onClick={handleNext}>Next</button>
       </div>
@@ -70,7 +79,6 @@ const CreateAccount = () => {
 };
 
 export default CreateAccount;
-
 
 // import { useState, useEffect } from 'react';
 // import { useNavigate } from 'react-router-dom';
@@ -81,8 +89,6 @@ export default CreateAccount;
 //   const navigate = useNavigate();
 //   const [userData, setUserData] = useState({
 //     name: '',
-//     gender: '',
-//     liveIn: '',
 //     connectionId: '',
 //     birthday: '',
 //     // Correct the property name
@@ -128,33 +134,12 @@ export default CreateAccount;
 //           onChange={handleChange}
 //         />
 
-//         <label htmlFor="gender">My Gender</label>
-//         <select
-//           id="gender"
-//           name="gender"
-//           value={userData.gender}
-//           onChange={handleChange}
-//         >
-//           <option value="">Select Gender</option>
-//           <option value="male">Male</option>
-//           <option value="female">Female</option>
-//         </select>
-
 //         <label htmlFor="birthday">Birthday:</label>
 //         <input
 //           type="date"
 //           id="birthday"
 //           name="birthday"
 //           value={userData.birthday}
-//           onChange={handleChange}
-//         />
-
-//         <label htmlFor="liveIn">liveIn:</label>
-//         <input
-//           type="text"
-//           id="liveIn"
-//           name="liveIn"
-//           value={userData.liveIn}
 //           onChange={handleChange}
 //         />
 
@@ -165,4 +150,3 @@ export default CreateAccount;
 // };
 
 // export default CreateAccount;
-

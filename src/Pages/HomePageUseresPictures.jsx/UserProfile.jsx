@@ -94,7 +94,7 @@ const UserProfile = () => {
             <>
               <h3>Looking For</h3>
               <p className="user-description">
-                {userData.preferences.gender} {userData.preferences.ageRange}
+                {userData.lookingfor} {userData.preferences.ageRange}
               </p>
               {/* ... (other preferences rendering) */}
             </>
