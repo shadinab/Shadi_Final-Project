@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import Chat2 from './Chat2';
 import { useGlobalSearchPage } from '../../context/SearchPageContext';
 
-const socket = io.connect('http://localhost:5000');
-// const socket = io.connect('https://shadi-dating-app.onrender.com');
+// const socket = io.connect('http://localhost:5000');
+const socket = io.connect('https://shadi-dating-app.onrender.com');
 
 function Chat() {
   const { MyData } = useGlobalSearchPage();
