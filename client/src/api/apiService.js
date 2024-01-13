@@ -2,12 +2,24 @@
 
 import axios from 'axios';
 
+const apiService1 = import.meta.env.VITE_ENV==='development'
+? import.meta.env.VITE_BASE_URL_DEVELOPMENT
+: import.meta.env.VITE_BASE_URL_PRODUCTION;
+
 const apiService = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: apiService1,
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+// const apiService = axios.create({
+//   baseURL: import.meta.env.VITE_BASE_URL,
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+// });
+
 
 export const createUser = async (userData) => {
   try {
@@ -144,3 +156,7 @@ export const sendMessage = async (messageData) => {
     throw error;
   }
 };
+
+
+
+export { apiService };

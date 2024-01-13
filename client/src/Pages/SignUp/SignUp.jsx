@@ -5,6 +5,7 @@ import CreateAccount from '../CreateAccount/CreateAccount';
 import './SignUp.css';
 import { createSignUpUser } from '../../api/apiService';
 
+
 const SignUp = () => {
   const navigate = useNavigate();
   const [showRegistration, setShowRegistration] = useState(false);

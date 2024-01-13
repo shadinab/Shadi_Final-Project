@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useGlobalSearchPage } from '../../context/SearchPageContext';
 import { useNavigate } from 'react-router-dom';
 
+import { apiService } from '../../api/apiService'; // Import your exported apiService
+
+
 const SearchPage = () => {
   const navigate = useNavigate();
   const {
@@ -21,7 +24,9 @@ const SearchPage = () => {
   const handleSearch = async () => {
     try {
       // Make a GET request to the API endpoint to get all users
-      const response = await axios.get('http://localhost:5000/api/users');
+      // const response = await axios.get('http://localhost:5000/api/users');
+
+      const response = await apiService.get('/users');
 
       // Assuming the server responds with a 'data' property containing the user data
       const allUsers = response.data.data;

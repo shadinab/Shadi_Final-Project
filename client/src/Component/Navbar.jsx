@@ -1,26 +1,30 @@
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import { useGlobalSearchPage } from '../context/SearchPageContext';
+// import { useGlobalSearchPage } from '../context/SearchPageContext';
 
 const Navbar = () => {
-  const { MyData } = useGlobalSearchPage();
+  // const { MyData } = useGlobalSearchPage();
 
   return (
     <nav className="navbar">
       <div className="leftContainer">
         {/* Left side SVG as a link to the home page */}
-
         <Link to="/LogIn" className="navLink">
           Log In
         </Link>
         <Link to="/" className="logoLink">
           <img src="/public/Navbar svg.png" alt="Logo" className="logo" />
         </Link>
-        {MyData && (
+        {/* {MyData && (
           <Link to="/LogOut" className="navLink">
             Log Out
           </Link>
-        )}
+        )} */}
+        
+          <Link to="/LogOut" className="navLink">
+            Log Out
+          </Link>
+      
       </div>
       <div className="rightContainer">
         {/* Search Button */}

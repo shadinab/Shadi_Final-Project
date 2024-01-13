@@ -1,17 +1,17 @@
-
 // LogIn.// LogIn.jsx
 import { useState } from 'react';
 import SignUp from '../SignUp/SignUp';
 // import MyProfile from '../MyProfile/MyProfile';
 // import { useUser } from '../../context/UserContext'; // Update the path
 
-import axios from 'axios'; // Import Axios
+import { apiService } from '../../api/apiService'; // Import your exported apiService
+
+// import axios from 'axios'; // Import Axios
 import { useNavigate } from 'react-router-dom';
 import './LogIn.css';
 
-
 const LogIn = () => {
-//  const { login,user } = useUser(); 
+  //  const { login,user } = useUser();
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -22,24 +22,29 @@ const LogIn = () => {
   const handleLogin = async () => {
     try {
       // Make a login request to your back-end API using Axios
-      const response = await axios.post(
-        'http://localhost:5000/api/auth/login',
-        {
-          email: username, // Assuming email is the same as the username for simplicity
-          password: password,
-        }
-      );
+      const response = await apiService.post('/auth/login', {
+        email: username, // Assuming email is the same as the username for simplicity
+        password: password,
+      });
+
+      //    const handleLogin = async () => {
+      // try {
+      //   // Make a login request to your back-end API using Axios
+      //   const response = await axios.post(
+      //     'http://localhost:5000/api/auth/login',
+      //     {
+      //       email: username, // Assuming email is the same as the username for simplicity
+      //       password: password,
+      //     }
+      //   );
 
       console.log('Axios login response:', response);
 
-     if (response.data.success) {
-            localStorage.setItem(
-              'tokenconnectionId',
-              response.data.connectionId
-            );
-            console.log(`logininconnectionId-${response.data.connectionId}`);
+      if (response.data.success) {
+        localStorage.setItem('tokenconnectionId', response.data.connectionId);
+        console.log(`logininconnectionId-${response.data.connectionId}`);
 
-      // login(response); // Set login status to true
+        // login(response); // Set login status to true
         navigate('/');
       } else {
         console.error('Login failed:', response.data.error);
@@ -48,9 +53,6 @@ const LogIn = () => {
       console.error('An error occurred during login:', error.message);
     }
   };
-
-
-
 
   const handleSignUp = () => {
     navigate('/SignUp');
@@ -109,13 +111,6 @@ const LogIn = () => {
 
 export default LogIn;
 
-
-
-
-
-
-
-
 // // LogIn.// LogIn.jsx
 // import { useState } from 'react';
 // import SignUp from '../SignUp/SignUp';
@@ -126,9 +121,8 @@ export default LogIn;
 // import { useNavigate } from 'react-router-dom';
 // import './LogIn.css';
 
-
 // const LogIn = () => {
-// //  const { login,user } = useUser(); 
+// //  const { login,user } = useUser();
 //   const navigate = useNavigate();
 //   const [username, setUsername] = useState('');
 //   const [password, setPassword] = useState('');
@@ -165,9 +159,6 @@ export default LogIn;
 //       console.error('An error occurred during login:', error.message);
 //     }
 //   };
-
-
-
 
 //   const handleSignUp = () => {
 //     navigate('/SignUp');
@@ -225,6 +216,3 @@ export default LogIn;
 // };
 
 // export default LogIn;
-
-
-

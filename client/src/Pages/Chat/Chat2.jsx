@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ScrollToBottom from 'react-scroll-to-bottom';
-import axios from 'axios';
+// import axios from 'axios';
+import { apiService } from '../../api/apiService.js'; // Import your exported apiService
 
 function Chat2({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState('');
@@ -25,13 +26,15 @@ function Chat2({ socket, username, room }) {
 
   useEffect(() => {
     const fetchChatHistory = async () => {
+      // try {
+      //   const response = await axios.get(
+      //     `http://localhost:5000/api/chat/history/${room}`
+      //   );
       try {
-        const response = await axios.get(
-          `http://localhost:5000/api/chat/history/${room}`
-        );
+        const response = await apiService.get(`/chat/history/${room}`);
 
         console.log('Response:', response.data);
-          console.log("responseHistoy");
+        console.log('responseHistoy');
         const data = response.data;
 
         if (data && data.messages) {

@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import './UserGrid.css';
+import { apiService } from '../../api/apiService'; // Import your exported apiService
 
 const UserGrid = () => {
   const [users, setUsers] = useState([]);
@@ -12,12 +13,25 @@ const UserGrid = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/users');
+        const response = await apiService.get(
+          '/users'
+        );
         setUsers(response.data.data);
       } catch (error) {
         console.error('Error fetching user data:', error.message);
       }
     };
+
+
+    //  useEffect(() => {
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await axios.get('http://localhost:5000/api/users');
+    //     setUsers(response.data.data);
+    //   } catch (error) {
+    //     console.error('Error fetching user data:', error.message);
+    //   }
+    // };
 
     fetchData();
 
