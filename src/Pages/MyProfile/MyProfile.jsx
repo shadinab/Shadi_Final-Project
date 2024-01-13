@@ -1,7 +1,7 @@
 // MyProfile.js
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './MyProfile.css';
-import { useGlobalSearchPage } from '../../context/SearchPageContext';
+// import { useGlobalSearchPage } from '../../context/SearchPageContext';
 import {
   MyProfileConnectionId,
   MyProfileUpdateUser,
@@ -9,21 +9,21 @@ import {
 import ProfileUpdateForm from './ProfileUpdateForm';
 import { useNavigate } from 'react-router-dom';
 
-
 const MyProfile = () => {
-  const { MyData, setMyData } = useGlobalSearchPage();
+  // const {  } = useGlobalSearchPage();
+  const [MyData2, setMyData2] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
-const navigate = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await MyProfileConnectionId(MyData);
+        const response = await MyProfileConnectionId(MyData2);
         console.log(`myprofileresponse- ${JSON.stringify(response)}`);
 
         if (response.success) {
           const profileData = response.data;
-          setMyData(profileData);
+          setMyData2(profileData);
           console.log(profileData);
         } else {
           console.error('Error fetching profile data:', response.error);
@@ -34,7 +34,7 @@ const navigate = useNavigate();
     };
 
     fetchProfileData();
-  }, [MyData, setMyData]);
+  }, [MyData2, setMyData2]);
 
   const handleUpdateClick = () => {
     setIsEditMode(true);
@@ -44,15 +44,15 @@ const navigate = useNavigate();
     try {
       setIsUpdating(true);
       const updatedProfile = await MyProfileUpdateUser({
-        ...MyData,
+        ...MyData2,
         details: {
-          ...MyData.details,
-          liveIn:updatedData.liveIn,
+          ...MyData2.details,
+          liveIn: updatedData.liveIn,
           workAs: updatedData.workAs,
           education: updatedData.education,
         },
         preferences: {
-          ...MyData.preferences,
+          ...MyData2.preferences,
           ageRange: updatedData.ageRange,
         },
         avatar: updatedData.avatar,
@@ -60,14 +60,14 @@ const navigate = useNavigate();
         description: updatedData.description,
         background: updatedData.background,
         interests: updatedData.interests,
-        lookingfor:updatedData.lookingfor,
+        lookingfor: updatedData.lookingfor,
         photos: updatedData.photos,
       });
 
-      setMyData(updatedProfile);
+      setMyData2(updatedProfile);
       setIsEditMode(false);
       console.log('Update successful:', updatedProfile);
-            navigate('/');
+      navigate('/');
     } catch (error) {
       console.error('Update failed:', error);
     } finally {
@@ -79,7 +79,7 @@ const navigate = useNavigate();
     setIsEditMode(false);
   };
 
-  if (!MyData) {
+  if (!MyData2) {
     return (
       <div className="center-container">
         <p className="login-message">Please Log In....</p>
@@ -91,29 +91,29 @@ const navigate = useNavigate();
     <div className="user-profile">
       <div className="profile-background">
         <img
-          src={MyData.background}
+          src={MyData2.background}
           alt="Profile Background"
           className="background-image"
         />
       </div>
       <div className="user-details">
         <img
-          src={MyData.avatar}
-          alt={MyData.name}
+          src={MyData2.avatar}
+          alt={MyData2.name}
           className="user-picture-large"
         />
         {isEditMode ? (
           <ProfileUpdateForm
             onUpdate={handleUpdateFormSubmit}
             onCancel={handleUpdateFormCancel}
-            initialData={MyData}
+            initialData={MyData2}
           />
         ) : (
           <>
-            <h2>{MyData.name}</h2>
-            <div className="user-description">{MyData.description}</div>
+            <h2>{MyData2.name}</h2>
+            <div className="user-description">{MyData2.description}</div>
             <div className="user-description">
-              {Object.entries(MyData.details).map(([key, value]) => (
+              {Object.entries(MyData2.details).map(([key, value]) => (
                 <div key={key}>
                   <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
                   {value}
@@ -123,16 +123,16 @@ const navigate = useNavigate();
             <div>
               <h2>My interest</h2>
               <div className="user-description">
-                {MyData.interests.join(', ')}
+                {MyData2.interests.join(', ')}
               </div>
             </div>
 
             <div className="user-additional-info">
-              {MyData.preferences && (
+              {MyData2.preferences && (
                 <>
                   <h3>Looking For</h3>
                   <p className="user-description">
-                    {MyData.lookingfor}, {MyData.preferences.ageRange}
+                    {MyData2.lookingfor}, {MyData2.preferences.ageRange}
                   </p>
                 </>
               )}
@@ -140,7 +140,7 @@ const navigate = useNavigate();
             <div className="user-photos">
               <h3>User Photos</h3>
               <div className="photos-container">
-                {MyData.photos.map((photo, index) => (
+                {MyData2.photos.map((photo, index) => (
                   <img
                     key={index}
                     src={photo}
@@ -166,7 +166,6 @@ const navigate = useNavigate();
 
 export default MyProfile;
 
-
 // MyProfile.js
 // import  { useEffect, useState } from 'react';
 // import './MyProfile.css';
@@ -177,7 +176,6 @@ export default MyProfile;
 // } from '../../api/apiService';
 // import ProfileUpdateForm from './ProfileUpdateForm';
 // import { useNavigate } from 'react-router-dom';
-
 
 // const MyProfile = () => {
 //   const { MyData, setMyData } = useGlobalSearchPage();

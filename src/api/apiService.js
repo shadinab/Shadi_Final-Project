@@ -106,7 +106,9 @@ export const MyProfileConnectionId = async (userData) => {
  const tokenconnectionId = (
    localStorage.getItem('tokenconnectionId') );
  
- console.log(`api tokenconnectionId ${tokenconnectionId} `);
+ console.log(
+   `api tokMyProfileConnectionIdzenconnectionId ${tokenconnectionId} `
+ );
     
     // Check if tokenconnectionId is available in localStorage
     if (!tokenconnectionId) {
