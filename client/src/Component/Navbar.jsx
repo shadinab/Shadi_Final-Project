@@ -13,7 +13,7 @@ const Navbar = () => {
           Log In
         </Link>
         <Link to="/" className="logoLink">
-          <img src="/public/Navbar svg.png" alt="Logo" className="logo" />
+          <img src="/client/public/Navbar svg.png" alt="Logo" className="logo" />
         </Link>
         {/* {MyData && (
           <Link to="/LogOut" className="navLink">
