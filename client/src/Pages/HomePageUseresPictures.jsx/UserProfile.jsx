@@ -5,14 +5,14 @@ import { useLocation } from 'react-router-dom';
 import './UserProfile.css';
 // import Chat from '../Chat/Chat';
 import { Link } from 'react-router-dom';
-// import { useGlobalSearchPage } from '../../context/SearchPageContext';
+import { useGlobalSearchPage } from '../../context/SearchPageContext';
 
 import { apiService } from '../../api/apiService'; // Import your exported apiService
 
 const UserProfile = () => {
   console.log('hi');
   const location = useLocation();
-  // const { MyData } = useGlobalSearchPage();
+  const { MyData } = useGlobalSearchPage();
   const [userData, setUserData] = useState(null);
   // const { id } = useParams();
   const getUserSelectedData = JSON.parse(
@@ -86,23 +86,20 @@ const UserProfile = () => {
           className="background-image"
         />
         {/* tokenconnectionId !== getUserSelectedData && */}
-        {/* {MyData && (
+        {MyData && (
+          <Link to={`/${getUserSelectedData}/chat`}>
+            <button className="center">
+              Send a Message To {userData.name}
+            </button>
+          </Link>
+        )}
+        {/* {tokenconnectionId !== getUserSelectedData && if (!MyData)  (
           <Link to={`/${getUserSelectedData}/chat`}>
             <button className="center">
               Send a Message To {userData.name}
             </button>
           </Link>
         )} */}
-
-          
-          <Link to={`/${getUserSelectedData}/chat`}>
-            <button className="center">
-              Send a Message To {userData.name}
-            </button>
-          </Link>
-      
-
-
       </div>
       <div className="user-details">
         <img

@@ -1,5 +1,5 @@
 import './SearchPage.css';
-import axios from 'axios';
+// import axios from 'axios';
 import { useGlobalSearchPage } from '../../context/SearchPageContext';
 import { useNavigate } from 'react-router-dom';
 

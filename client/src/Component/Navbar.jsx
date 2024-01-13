@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-// import { useGlobalSearchPage } from '../context/SearchPageContext';
+import { useGlobalSearchPage } from '../context/SearchPageContext';
 import svg from '../../public/svg.png'
 const Navbar = () => {
-  // const { MyData } = useGlobalSearchPage();
+  const { MyData } = useGlobalSearchPage();
 
   return (
     <nav className="navbar">
@@ -15,15 +15,15 @@ const Navbar = () => {
         <Link to="/" className="logoLink">
           <img src={svg} alt="Logo" className="logo" />
         </Link>
-        {/* {MyData && (
+        {MyData && (
           <Link to="/LogOut" className="navLink">
             Log Out
           </Link>
-        )} */}
+        )}
 
-        <Link to="/LogOut" className="navLink">
+        {/* <Link to="/LogOut" className="navLink">
           Log Out
-        </Link>
+        </Link> */}
       </div>
       <div className="rightContainer">
         {/* Search Button */}

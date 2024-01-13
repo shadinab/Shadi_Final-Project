@@ -1,7 +1,7 @@
 // MyProfile.js
 import { useEffect, useState } from 'react';
 import './MyProfile.css';
-// import { useGlobalSearchPage } from '../../context/SearchPageContext';
+import { useGlobalSearchPage } from '../../context/SearchPageContext';
 import {
   MyProfileConnectionId,
   MyProfileUpdateUser,
@@ -10,20 +10,20 @@ import ProfileUpdateForm from './ProfileUpdateForm';
 import { useNavigate } from 'react-router-dom';
 
 const MyProfile = () => {
-  // const {  } = useGlobalSearchPage();
-  const [MyData2, setMyData2] = useState(null);
+  const { MyData, setMyData } = useGlobalSearchPage();
+  // const [MyData, setMyData] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await MyProfileConnectionId(MyData2);
+        const response = await MyProfileConnectionId(MyData);
         console.log(`myprofileresponse- ${JSON.stringify(response)}`);
 
         if (response.success) {
           const profileData = response.data;
-          setMyData2(profileData);
+          setMyData(profileData);
           console.log(profileData);
         } else {
           console.error('Error fetching profile data:', response.error);
@@ -34,7 +34,7 @@ const MyProfile = () => {
     };
 
     fetchProfileData();
-  }, [MyData2, setMyData2]);
+  }, [MyData, setMyData]);
 
   const handleUpdateClick = () => {
     setIsEditMode(true);
@@ -44,15 +44,15 @@ const MyProfile = () => {
     try {
       setIsUpdating(true);
       const updatedProfile = await MyProfileUpdateUser({
-        ...MyData2,
+        ...MyData,
         details: {
-          ...MyData2.details,
+          ...MyData.details,
           liveIn: updatedData.liveIn,
           workAs: updatedData.workAs,
           education: updatedData.education,
         },
         preferences: {
-          ...MyData2.preferences,
+          ...MyData.preferences,
           ageRange: updatedData.ageRange,
         },
         avatar: updatedData.avatar,
@@ -64,7 +64,7 @@ const MyProfile = () => {
         photos: updatedData.photos,
       });
 
-      setMyData2(updatedProfile);
+      setMyData(updatedProfile);
       setIsEditMode(false);
       console.log('Update successful:', updatedProfile);
       navigate('/');
@@ -79,7 +79,7 @@ const MyProfile = () => {
     setIsEditMode(false);
   };
 
-  if (!MyData2) {
+  if (!MyData) {
     return (
       <div className="center-container">
         <p className="login-message">Please Log In....</p>
@@ -91,29 +91,29 @@ const MyProfile = () => {
     <div className="user-profile">
       <div className="profile-background">
         <img
-          src={MyData2.background}
+          src={MyData.background}
           alt="Profile Background"
           className="background-image"
         />
       </div>
       <div className="user-details">
         <img
-          src={MyData2.avatar}
-          alt={MyData2.name}
+          src={MyData.avatar}
+          alt={MyData.name}
           className="user-picture-large"
         />
         {isEditMode ? (
           <ProfileUpdateForm
             onUpdate={handleUpdateFormSubmit}
             onCancel={handleUpdateFormCancel}
-            initialData={MyData2}
+            initialData={MyData}
           />
         ) : (
           <>
-            <h2>{MyData2.name}</h2>
-            <div className="user-description">{MyData2.description}</div>
+            <h2>{MyData.name}</h2>
+            <div className="user-description">{MyData.description}</div>
             <div className="user-description">
-              {Object.entries(MyData2.details).map(([key, value]) => (
+              {Object.entries(MyData.details).map(([key, value]) => (
                 <div key={key}>
                   <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{' '}
                   {value}
@@ -123,16 +123,16 @@ const MyProfile = () => {
             <div>
               <h2>My interest</h2>
               <div className="user-description">
-                {MyData2.interests.join(', ')}
+                {MyData.interests.join(', ')}
               </div>
             </div>
 
             <div className="user-additional-info">
-              {MyData2.preferences && (
+              {MyData.preferences && (
                 <>
                   <h3>Looking For</h3>
                   <p className="user-description">
-                    {MyData2.lookingfor}, {MyData2.preferences.ageRange}
+                    {MyData.lookingfor}, {MyData.preferences.ageRange}
                   </p>
                 </>
               )}
@@ -140,7 +140,7 @@ const MyProfile = () => {
             <div className="user-photos">
               <h3>User Photos</h3>
               <div className="photos-container">
-                {MyData2.photos.map((photo, index) => (
+                {MyData.photos.map((photo, index) => (
                   <img
                     key={index}
                     src={photo}

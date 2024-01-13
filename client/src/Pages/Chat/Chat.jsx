@@ -4,22 +4,21 @@ import { useState, useEffect } from 'react';
 import Chat2 from './Chat2';
 import { useGlobalSearchPage } from '../../context/SearchPageContext';
 
-
 const socket = io.connect('http://localhost:5000');
 // const socket = io.connect('https://shadi-dating-app.onrender.com');
-
 
 function Chat() {
   const { MyData } = useGlobalSearchPage();
   const [username, setUsername] = useState('');
   const [room, setRoom] = useState('');
   const [showChat, setShowChat] = useState(false);
- 
+
   useEffect(() => {
+    console.log(`MyData--${MyData}`);
     // Retrieve selectedUserId from local storage on component mount
     const selectedUserId = localStorage.getItem('selectedUserId');
- const cleanedUserId = selectedUserId.replace(/"/g, ''); // Remove double quotes
- console.log(`selectedUserId=${cleanedUserId}`);
+    const cleanedUserId = selectedUserId.replace(/"/g, ''); // Remove double quotes
+    console.log(`selectedUserId=${cleanedUserId}`);
     if (MyData.name && cleanedUserId) {
       // Automatically join the chat room
       socket.emit('join_room', cleanedUserId);
@@ -40,9 +39,6 @@ function Chat() {
 }
 
 export default Chat;
-
-
-
 
 // import './Chat.css';
 // import io from 'socket.io-client';
@@ -83,8 +79,6 @@ export default Chat;
 // }
 
 // export default Chat;
-
-
 
 // ----------------------------------------------
 
@@ -129,7 +123,6 @@ export default Chat;
 // }
 
 // export default Chat;
-
 
 // import './Chat.css';
 // import io from 'socket.io-client';
