@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 // import axios from 'axios';
 import './UserGrid.css';
 import { apiService } from '../../api/apiService'; // Import your exported apiService
+import Spinner from '../../utils/Spinner';
 
 const UserGrid = () => {
   const [users, setUsers] = useState([]);
   const [imagesPerRow, setImagesPerRow] = useState(5);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
    
   useEffect(() => {
@@ -17,6 +19,7 @@ const UserGrid = () => {
           '/users'
         );
         setUsers(response.data.data);
+           setLoading(false);
       } catch (error) {
         console.error('Error fetching user data:', error.message);
       }
@@ -66,6 +69,8 @@ const formatBirthday = (user) => {
 
   return (
     <div className="user-grid">
+      <Spinner loading={loading} />
+
       {users.map((user) => (
         <div className="user-item" key={user._id}>
           <button
