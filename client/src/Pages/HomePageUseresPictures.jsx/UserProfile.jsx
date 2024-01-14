@@ -38,7 +38,6 @@ const UserProfile = () => {
           `/usersById/${id}`
         );
         console.log('User by ID Response:', response.data);
-                   setLoading(false);
         setUserData(response.data.data);
 
       } else if (getUserSelectedData) {
@@ -74,17 +73,23 @@ const UserProfile = () => {
   //   }
   // };
 
+  
+
   useEffect(() => {
     fetchUserData();
   }, [id, getUserSelectedData]); // Add
+
+
   if (!userData) {
     // Show a loading indicator or message while data is being fetched
-    return <p>Loading...</p>;
-  }
+   return (
+     <div className="spinner-container1">
+       <Spinner loading={loading} />
+     </div>
+   );  }
 
   return (
     <div className="user-profile">
-      <Spinner loading={loading} />
       <div className="profile-background">
         <img
           src={userData.background}

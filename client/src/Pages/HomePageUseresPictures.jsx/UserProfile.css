@@ -7,6 +7,14 @@
 }
 
 
+.spinner-container1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25vh; /* Make sure the container covers the entire viewport height */
+}
+
+
 .user-profile {
   display: flex;
   align-items: center;
