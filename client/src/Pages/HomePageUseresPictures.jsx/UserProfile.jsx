@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { useGlobalSearchPage } from '../../context/SearchPageContext';
 
 import { apiService } from '../../api/apiService'; // Import your exported apiService
+  import Spinner from '../../utils/Spinner';
 
 const UserProfile = () => {
   console.log('hi');
@@ -15,6 +16,8 @@ const UserProfile = () => {
   const { MyData } = useGlobalSearchPage();
   const [userData, setUserData] = useState(null);
   // const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+
   const getUserSelectedData = JSON.parse(
     localStorage.getItem('selectedUserId')
   );
@@ -35,7 +38,9 @@ const UserProfile = () => {
           `/usersById/${id}`
         );
         console.log('User by ID Response:', response.data);
+                   setLoading(false);
         setUserData(response.data.data);
+
       } else if (getUserSelectedData) {
         // If 'getUserSelectedData' is available, fetch data using it
         const response = await apiService.get(`/users/${getUserSelectedData}`);
@@ -79,6 +84,7 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile">
+      <Spinner loading={loading} />
       <div className="profile-background">
         <img
           src={userData.background}
