@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { useGlobalSearchPage } from '../context/SearchPageContext';
-import svg from '../../public/svg.png'
+import svg from '../../src/svg.png'
 const Navbar = () => {
   const { MyData } = useGlobalSearchPage();
 

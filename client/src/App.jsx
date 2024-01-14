@@ -11,15 +11,16 @@ import InterestsPage from './Pages/InterestsPage/InterestsPage';
 import CreateAccount from './Pages/CreateAccount/CreateAccount';
 import { SearchPageProvider } from './context/SearchPageContext';
 import AcoountDetails from '../src/Pages/CreateAccount/AcoountDetails';
-import Chat  from '../src/Pages/Chat/Chat';
-// import { UserProvider } from '../src/context/UserContext';
-import LogOut from '../src/Pages/LogOut/LogOut'
+import Chat from '../src/Pages/Chat/Chat';
+import { ToastContainer } from 'react-toastify';
+import LogOut from '../src/Pages/LogOut/LogOut';
 
 function App() {
   return (
     <>
       {/* <UserProvider> */}
       <SearchPageProvider>
+        <ToastContainer />
         <Router>
           <Navbar />
           <Routes>
@@ -54,7 +55,6 @@ function App() {
 }
 
 export default App;
-
 
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import Navbar from './Component/Navbar';
