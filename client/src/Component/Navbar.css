@@ -28,3 +28,26 @@
   text-decoration: none;
   margin: 0 10px;
 }
+
+
+
+@media (max-width: 600px) {
+  /* Styles for screens with a maximum width of 600px (typical mobile devices) */
+  .navbar {
+    flex-direction: column;
+    /* align-items: stretch; */
+    text-align: center;
+  }
+
+  .leftContainer, .rightContainer {
+    margin-bottom: 10px;
+  }
+
+  .logo {
+    margin: 0;
+  }
+
+  .navLink {
+    margin: 5px 45px;
+  }
+}

@@ -18,3 +18,16 @@
   max-height: 50%;
   border-radius: 10px; /* Optional: Add rounded corners */
 }
+
+@media (max-width: 600px) {
+  /* Styles for screens with a maximum width of 600px (typical mobile devices) */
+  .enlarged-image-view {
+    background: rgba(0, 0, 0, 0.9); /* Darken the background a bit more for better visibility */
+  }
+
+  .enlarged-image {
+    max-width: 60%; /* Adjust the maximum width for better fit on smaller screens */
+    max-height: 30%; /* Adjust the maximum height for better fit on smaller screens */
+    border-radius: 0; /* Remove rounded corners for a cleaner look */
+  }
+}

@@ -6,14 +6,12 @@
   object-fit: cover;
 }
 
-
 .spinner-container1 {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 25vh; /* Make sure the container covers the entire viewport height */
 }
-
 
 .user-profile {
   display: flex;
@@ -128,13 +126,19 @@
   }
 
   .background-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  margin-bottom: 2rem;
-}
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-bottom: 2rem;
+  }
 
   .profile-background {
     width: 100%;
   }
+  .center{
+ margin-bottom: 4rem;
+ margin-left: 2rem;
+  }
+  
 }
+
