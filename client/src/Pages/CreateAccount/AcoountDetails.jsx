@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CreateAccount.css';
 import { updateUser } from '../../api/apiService';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AcoountDetails = () => {
   // State to hold form data
@@ -49,9 +51,9 @@ const AcoountDetails = () => {
     });
   };
 
-  const onBack = () => {
-    navigate('/SignUp/CreateAccount');
-  };
+  // const onBack = () => {
+  //   navigate('/SignUp/CreateAccount');
+  // };
 
   const handleNext = async (e) => {
     e.preventDefault();
@@ -75,6 +77,7 @@ const AcoountDetails = () => {
           },
           photos: [],
         });
+              toast.success('Data has been updated successfully!');
 
         navigate('/SignUp/CreateAccount/AcoountDetails/interests', {
           state: { formData },
@@ -89,6 +92,7 @@ const AcoountDetails = () => {
 
   return (
     <div className="registration-container">
+      <ToastContainer/>
       <h2>Please fill in the details</h2>
       <form className="form-container">
         <label>Avatar Image:</label>
@@ -178,7 +182,7 @@ const AcoountDetails = () => {
           </div>
         ))}
 
-        <button onClick={onBack}>Back</button>
+        {/* <button onClick={onBack}>Back</button> */}
         <button onClick={handleNext}>Next</button>
       </form>
     </div>

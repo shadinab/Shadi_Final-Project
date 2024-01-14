@@ -4,8 +4,8 @@
   display: flex;
   overflow-x: scroll;
   padding: 10px;
-    justify-content: center; /* Center the flex items horizontally */
-margin-bottom: ;
+  justify-content: center; /* Center the flex items horizontally */
+  overflow: hidden;
 }
 
 .story-image {
@@ -17,7 +17,6 @@ margin-bottom: ;
 }
 
 /* Responsive styles */
-
 
 @media screen and (max-width: 480px) {
   .image-story {

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CreateAccount.css';
 import { createUser } from '../../api/apiService';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateAccount = () => {
   const navigate = useNavigate();
@@ -33,6 +35,8 @@ const CreateAccount = () => {
     const response = await createUser(userData);
 
     if (response.success) {
+              toast.success('Data has been saved successfully!');
+
       navigate('/SignUp/CreateAccount/AcoountDetails', { state: { userData } });
     } else {
       console.error('User creation failed:', response.error);
@@ -41,6 +45,7 @@ const CreateAccount = () => {
 
   return (
     <div>
+      <ToastContainer/>
       <h1>Create Account</h1>
       <div className="form-container">
         <label htmlFor="name">Name:</label>

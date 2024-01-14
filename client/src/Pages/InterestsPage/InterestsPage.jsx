@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './InterestsPage.css';
 import { updateUser } from '../../api/apiService';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const InterestsPage = ({ userData }) => {
   const navigate = useNavigate();
@@ -45,6 +47,8 @@ const handleInterestToggle = (interest) => {
 
      if (response.success) {
        // Navigate or perform additional actions after successful user creation
+               toast.success('account has been successfully created.!');
+
        navigate('/LogIn');
      } else {
        console.error('User creation failed:', response.error);
@@ -56,12 +60,13 @@ const handleInterestToggle = (interest) => {
 
 
 
-   const onBack = () => {
-     navigate('/SignUp/CreateAccount/AcoountDetails');
-   };
+  //  const onBack = () => {
+  //    navigate('/SignUp/CreateAccount/AcoountDetails');
+  //  };
 
   return (
     <div>
+      <ToastContainer/>
       <h1>Select Your Interests</h1>
       <div className="interests-container">
         <div>
@@ -117,7 +122,7 @@ const handleInterestToggle = (interest) => {
         </div>
       </div>
       <div className="buttons-container">
-        <button onClick={onBack}>Back</button>
+        {/* <button onClick={onBack}>Back</button> */}
         <button onClick={handleFinish}>Finish</button>
       </div>
     </div>

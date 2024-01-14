@@ -8,6 +8,8 @@ import {
 } from '../../api/apiService';
 import ProfileUpdateForm from './ProfileUpdateForm';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MyProfile = () => {
   const { MyData, setMyData } = useGlobalSearchPage();
@@ -67,6 +69,10 @@ const MyProfile = () => {
       setMyData(updatedProfile);
       setIsEditMode(false);
       console.log('Update successful:', updatedProfile);
+                     toast.success(
+                       'Your account has been successfully updated!'
+                     );
+
       navigate('/');
     } catch (error) {
       console.error('Update failed:', error);
@@ -89,6 +95,7 @@ const MyProfile = () => {
 
   return (
     <div className="user-profile">
+      <ToastContainer/>
       <div className="profile-background">
         <img
           src={MyData.background}
