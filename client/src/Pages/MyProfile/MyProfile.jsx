@@ -10,14 +10,12 @@ import ProfileUpdateForm from './ProfileUpdateForm';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Spinner from '../../utils/Spinner';
 
 const MyProfile = () => {
   const { MyData, setMyData } = useGlobalSearchPage();
   // const [MyData, setMyData] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     const fetchProfileData = async () => {
@@ -28,7 +26,6 @@ const MyProfile = () => {
         if (response.success) {
           const profileData = response.data;
           setMyData(profileData);
-                    setLoading(false);
 
           console.log(profileData);
         } else {
@@ -137,7 +134,6 @@ const MyProfile = () => {
                 {MyData.interests.join(', ')}
               </div>
             </div>
-            <Spinner loading={loading} />
 
             <div className="user-additional-info">
               {MyData.preferences && (
