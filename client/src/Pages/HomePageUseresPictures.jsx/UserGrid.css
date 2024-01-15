@@ -16,6 +16,10 @@ body{
   margin: 10px;
 }
 
+a{
+    text-decoration: none;
+
+}
 .user-picture {
   width: 190px;
   height: 190px;
@@ -31,8 +35,10 @@ body{
 
 .makeitinsideimage
 {
- background: rgb(241, 234, 234);
+ background: transparent;
  border-radius: 5%;
+   text-decoration: none;
+
 }
 
 .makeitinsideimage:hover{

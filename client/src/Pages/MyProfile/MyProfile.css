@@ -94,4 +94,10 @@ img {
   .profile1 {
     height: 20vh;
   }
+
+  .login-message {
+  font-size:20px;
+  color: #333333; /* Adjust the color as needed */
+  /* Add more styles as needed */
+}
 }
