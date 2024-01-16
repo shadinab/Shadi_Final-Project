@@ -49,7 +49,7 @@ function App() {
             <Route path="/:userId" element={<UserProfile />} />
             <Route path="/search/:userId" element={<UserProfile />} />
             <Route path="/:userId/chat" element={<Chat />} />
-            <Route path="/:userId/video" element={<Video />} />
+            <Route path="/:userId/Video" element={<Video />} />
           </Routes>
         </Router>
       </SearchPageProvider>

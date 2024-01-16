@@ -105,7 +105,7 @@ const UserProfile = () => {
         )}
 
         {MyData && (
-          <Link to={`/${getUserSelectedData}/video`}>
+          <Link to={`/${getUserSelectedData}/Video`}>
             <button className="center">
               Start Video Chat with {userData.name}
             </button>
