@@ -11,6 +11,7 @@ import { apiService } from '../../api/apiService'; // Import your exported apiSe
 import Spinner from '../../utils/Spinner';
 // import Video from '../VideoCall/Video'
 
+import Video from '../Video/Video'
 const UserProfile = () => {
   console.log('hi');
   const location = useLocation();
@@ -87,8 +88,6 @@ const UserProfile = () => {
   return (
     <div className="user-profile">
       <div className="profile-background">
-        {/* <Video /> */}
-
         <img
           src={userData.background}
           alt="Profile Background"
@@ -103,13 +102,7 @@ const UserProfile = () => {
           </Link>
         )}
 
-       {MyData && (
-          <Link to={`/${getUserSelectedData}/video`}>
-            <button className="center">
-              Start Video Chat with {userData.name}
-            </button>
-          </Link>
-        )}
+        {MyData && <Video/>}
 
         {/* {tokenconnectionId !== getUserSelectedData && if (!MyData)  (
           <Link to={`/${getUserSelectedData}/chat`}>
