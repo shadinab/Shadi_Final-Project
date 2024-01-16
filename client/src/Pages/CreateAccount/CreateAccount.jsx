@@ -10,7 +10,6 @@ const CreateAccount = () => {
   const [userData, setUserData] = useState({
     name: '',
     connectionId: '',
-    // birthday: '',
     lookingfor: '',
   });
 
@@ -35,7 +34,7 @@ const CreateAccount = () => {
     const response = await createUser(userData);
 
     if (response.success) {
-              toast.success('Data has been saved successfully!');
+      toast.success('Data has been saved successfully!');
 
       navigate('/SignUp/CreateAccount/AcoountDetails', { state: { userData } });
     } else {
@@ -45,7 +44,7 @@ const CreateAccount = () => {
 
   return (
     <div>
-      <ToastContainer/>
+      <ToastContainer />
       <h1>Create Account</h1>
       <div className="form-container">
         <label htmlFor="name">Name:</label>
@@ -68,15 +67,6 @@ const CreateAccount = () => {
           <option value="female">Female</option>
         </select>
 
-        {/* <label htmlFor="birthday">Birthday:</label>
-        <input
-          type="date"
-          id="birthday"
-          name="birthday"
-          value={userData.birthday}
-          onChange={handleChange}
-        /> */}
-
         <button onClick={handleNext}>Next</button>
       </div>
     </div>
@@ -84,6 +74,17 @@ const CreateAccount = () => {
 };
 
 export default CreateAccount;
+
+{
+  /* <label htmlFor="birthday">Birthday:</label>
+        <input
+          type="date"
+          id="birthday"
+          name="birthday"
+          value={userData.birthday}
+          onChange={handleChange}
+        /> */
+}
 
 // import { useState, useEffect } from 'react';
 // import { useNavigate } from 'react-router-dom';
