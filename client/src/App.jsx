@@ -14,7 +14,7 @@ import AcoountDetails from '../src/Pages/CreateAccount/AcoountDetails';
 import Chat from '../src/Pages/Chat/Chat';
 import { ToastContainer } from 'react-toastify';
 import LogOut from '../src/Pages/LogOut/LogOut';
-// import Video from '../src/Pages/Video/video'
+import Video from './Pages/Video/Video';
 
 
 
@@ -49,7 +49,7 @@ function App() {
             <Route path="/:userId" element={<UserProfile />} />
             <Route path="/search/:userId" element={<UserProfile />} />
             <Route path="/:userId/chat" element={<Chat />} />
-            {/* <Route path="/:userId/video" element={<Video />} /> */}
+            <Route path="/:userId/video" element={<Video />} />
           </Routes>
         </Router>
       </SearchPageProvider>

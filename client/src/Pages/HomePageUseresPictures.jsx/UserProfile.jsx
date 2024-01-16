@@ -9,7 +9,7 @@ import { useGlobalSearchPage } from '../../context/SearchPageContext';
 
 import { apiService } from '../../api/apiService'; // Import your exported apiService
 import Spinner from '../../utils/Spinner';
-// import Video from '../Video/video'
+import Video from '../Video/Video'
 // import Video from '../VideoCall/Video'
 
 const UserProfile = () => {
@@ -103,14 +103,14 @@ const UserProfile = () => {
             </button>
           </Link>
         )}
-{/* 
+
         {MyData && (
           <Link to={`/${getUserSelectedData}/video`}>
             <button className="center">
               Start Video Chat with {userData.name}
             </button>
           </Link>
-        )} */}
+        )}
 
         {/* {tokenconnectionId !== getUserSelectedData && if (!MyData)  (
           <Link to={`/${getUserSelectedData}/chat`}>
