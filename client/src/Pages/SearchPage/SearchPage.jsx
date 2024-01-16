@@ -38,16 +38,20 @@ const SearchPage = () => {
           : true;
 
         const userMinAge = parseInt(
-          user.preferences.ageRange.split('-')[0],
-          10
-        );
-        const userMaxAge = parseInt(
-          user.preferences.ageRange.split('-')[1],
-          10
+          user.preferences.ageRange
         );
 
-        const meetsAgeRangeCriteria =
-          userMinAge >= minAge && userMaxAge <= maxAge;
+const meetsAgeRangeCriteria = userMinAge >= minAge && userMinAge <= maxAge;            console.log(`maxAge${maxAge}`);
+                        console.log(`userMinAge${userMinAge}`);
+            console.log(`minAge${minAge}`);
+
+        // const userMaxAge = parseInt(
+        //   user.preferences.ageRange.split('-')[1],
+        //   10
+        // );
+
+        // const meetsAgeRangeCriteria =
+        //   userMinAge >= minAge && userMaxAge <= maxAge;
 
         const meetsGenderCriteria = user.preferences.gender === gender;
 
@@ -161,18 +165,16 @@ export default SearchPage;
 
 
 
-
-
-
-
-
-// import './SearchPage.css';
-// import axios from 'axios';
+import './SearchPage.css';
+// // import axios from 'axios';
 // import { useGlobalSearchPage } from '../../context/SearchPageContext';
 // import { useNavigate } from 'react-router-dom';
 
+// import { apiService } from '../../api/apiService'; // Import your exported apiService
+
+
 // const SearchPage = () => {
-//     const navigate = useNavigate();
+//   const navigate = useNavigate();
 //   const {
 //     gender,
 //     setGender,
@@ -189,7 +191,9 @@ export default SearchPage;
 //   const handleSearch = async () => {
 //     try {
 //       // Make a GET request to the API endpoint to get all users
-//       const response = await axios.get('http://localhost:5000/api/users');
+//       // const response = await axios.get('http://localhost:5000/api/users');
+
+//       const response = await apiService.get('/users');
 
 //       // Assuming the server responds with a 'data' property containing the user data
 //       const allUsers = response.data.data;
@@ -200,20 +204,21 @@ export default SearchPage;
 //           ? user.details.liveIn === country
 //           : true;
 
-//           const userMinAge = parseInt(
-//             user.preferences.ageRange.split('-')[0],
-//             10
-//           );
-//           const userMaxAge = parseInt(
-//             user.preferences.ageRange.split('-')[1],
-//             10
-//           );
+//         const userMinAge = parseInt(
+//           user.preferences.ageRange.split('-')[0],
+//           10
+//         );
+//         const userMaxAge = parseInt(
+//           user.preferences.ageRange.split('-')[1],
+//           10
+//         );
 
-// const meetsAgeRangeCriteria = userMinAge >= minAge && userMaxAge <= maxAge;
+//         const meetsAgeRangeCriteria =
+//           userMinAge >= minAge && userMaxAge <= maxAge;
 
 //         const meetsGenderCriteria = user.preferences.gender === gender;
 
-//                                             console.log(meetsGenderCriteria);
+//         console.log(meetsGenderCriteria);
 
 //         return (
 //           meetsCountryCriteria && meetsAgeRangeCriteria && meetsGenderCriteria
@@ -230,9 +235,9 @@ export default SearchPage;
 //   const navigateToUserProfile = (userId) => {
 //     // Redirect to the UserProfile page with the user's ID
 //     console.log(`searchUserId----${userId}`);
-//     navigate(`/${userId}`);
+//     navigate(`/search/${userId}`);
 //   };
-
+// console.log('searchResults', searchResults);
 //   return (
 //     <div className="search-container">
 //       <h2>Find Your Match</h2>
@@ -314,3 +319,10 @@ export default SearchPage;
 // };
 
 // export default SearchPage;
+
+
+
+
+
+
+

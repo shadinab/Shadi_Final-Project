@@ -10,7 +10,7 @@ const CreateAccount = () => {
   const [userData, setUserData] = useState({
     name: '',
     connectionId: '',
-    birthday: '',
+    // birthday: '',
     lookingfor: '',
   });
 
@@ -68,14 +68,14 @@ const CreateAccount = () => {
           <option value="female">Female</option>
         </select>
 
-        <label htmlFor="birthday">Birthday:</label>
+        {/* <label htmlFor="birthday">Birthday:</label>
         <input
           type="date"
           id="birthday"
           name="birthday"
           value={userData.birthday}
           onChange={handleChange}
-        />
+        /> */}
 
         <button onClick={handleNext}>Next</button>
       </div>

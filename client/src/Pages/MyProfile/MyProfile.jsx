@@ -54,10 +54,10 @@ const MyProfile = () => {
           workAs: updatedData.workAs,
           education: updatedData.education,
         },
-        preferences: {
-          ...MyData.preferences,
-          ageRange: updatedData.ageRange,
-        },
+        // preferences: {
+        //   ...MyData.preferences,
+        //   ageRange: updatedData.ageRange,
+        // },
         avatar: updatedData.avatar,
         name: updatedData.name,
         description: updatedData.description,
@@ -120,6 +120,10 @@ const MyProfile = () => {
           <>
             <h2>{MyData.name}</h2>
             <div className="user-description">{MyData.description}</div>
+            {/* <div className="user-description">
+              {MyData.preferences.ageRange}
+            </div> */}
+
             <div className="user-description">
               {Object.entries(MyData.details).map(([key, value]) => (
                 <div key={key}>
@@ -140,7 +144,8 @@ const MyProfile = () => {
                 <>
                   <h3>Looking For</h3>
                   <p className="user-description">
-                    {MyData.lookingfor}, {MyData.preferences.ageRange}
+                    {MyData.lookingfor}
+                    {/* {MyData.preferences.ageRange} */}
                   </p>
                 </>
               )}

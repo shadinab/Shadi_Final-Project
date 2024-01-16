@@ -7,7 +7,7 @@ const ProfileUpdateForm = ({ onUpdate, onCancel, initialData }) => {
     liveIn: initialData.details.liveIn,
     workAs: initialData.details.workAs,
     education: initialData.details.education,
-    ageRange: initialData.preferences.ageRange,
+    // ageRange: initialData.preferences.ageRange,
     lookingfor: initialData.lookingfor,
     name: initialData.name,
     description: initialData.description,
@@ -119,13 +119,13 @@ const ProfileUpdateForm = ({ onUpdate, onCancel, initialData }) => {
           value={formData.lookingfor}
           onChange={handleChange}
         />
-        <label>Age Range:</label>
+        {/* <label>Age Range:</label>
         <input
           type="text"
           name="ageRange"
           value={formData.ageRange}
           onChange={handleChange}
-        />
+        /> */}
       </div>
       <div>
         <label>Background:</label>

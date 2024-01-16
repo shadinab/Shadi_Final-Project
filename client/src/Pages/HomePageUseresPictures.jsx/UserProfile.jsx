@@ -123,6 +123,9 @@ const UserProfile = () => {
         <div>
           <h2>{userData.name}</h2>
           <div className="user-description">{userData.description}</div>
+           {/* <div className="user-description">
+              {MyData.preferences.ageRange}
+            </div> */}
         </div>
         <div>
           <h2>My interest</h2>
@@ -146,7 +149,8 @@ const UserProfile = () => {
             <>
               <h3>Looking For</h3>
               <p className="user-description">
-                {userData.lookingfor} {userData.preferences.ageRange}
+                {userData.lookingfor}
+                 {/* {userData.preferences.ageRange} */}
               </p>
               {/* ... (other preferences rendering) */}
             </>

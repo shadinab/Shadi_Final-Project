@@ -73,12 +73,12 @@ exports.getUserById = async (req, res) => {
 
 exports.createUser = async (req, res) => {
   try {
-    const { name, connectionId, lookingfor, birthday } = req.body;
+    const { name, connectionId, lookingfor } = req.body;
 
     // Create a new user with the provided connectionId
     const newUser = new User({
       name,
-      birthday,
+      // birthday,
       lookingfor,
       connectionId,
       // ... other properties from req.body

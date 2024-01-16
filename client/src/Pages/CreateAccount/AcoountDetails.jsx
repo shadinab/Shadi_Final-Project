@@ -160,7 +160,7 @@ const AcoountDetails = () => {
           onChange={handleChange}
         />
 
-        <label>Age Range:</label>
+        <label>My Age:</label>
         <input
           className="input"
           type="text"

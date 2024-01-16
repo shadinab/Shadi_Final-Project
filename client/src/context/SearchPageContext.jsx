@@ -8,6 +8,7 @@ export const SearchPageProvider = ({ children }) => {
   const [gender, setGender] = useState('Man');
   const [minAge, setMinAge] = useState(18);
   const [maxAge, setMaxAge] = useState(30);
+  // const [ageRange, setAgeRange] = useState(null);
   const [country, setCountry] = useState('');
 
  const [searchResults, setSearchResults] = useState([]);
@@ -34,7 +35,7 @@ export const SearchPageProvider = ({ children }) => {
         MyData,
         setMyData,
         loading,
-        setLoading
+        setLoading,
       }}
     >
       {children}

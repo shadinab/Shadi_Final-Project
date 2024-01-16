@@ -61,11 +61,11 @@ const UserGrid = () => {
     localStorage.setItem('selectedUserId', JSON.stringify(user.connectionId));
     setSelectedUser(user);
   };
-const formatBirthday = (user) => {
-  const originalDateString = user.birthday;
-  const dateObject = new Date(originalDateString);
-  return dateObject.toISOString().split('T')[0];
-};
+// const formatBirthday = (user) => {
+//   const originalDateString = user.birthday;
+//   const dateObject = new Date(originalDateString);
+//   return dateObject.toISOString().split('T')[0];
+// };
 
   return (
     <div className="user-grid">
@@ -80,7 +80,8 @@ const formatBirthday = (user) => {
             <Link key={user.connectionId} to={`/${user.connectionId}`}>
               <img src={user.avatar} alt={user.name} className="user-picture" />
               <div className="font">{user.name}</div>
-              <div className="font">{formatBirthday(user)}</div>{' '}
+              <div className="font">{user.preferences.ageRange}</div>
+              {/* <div className="font">{formatBirthday(user)}</div>{' '} */}
             </Link>
           </button>
         </div>
