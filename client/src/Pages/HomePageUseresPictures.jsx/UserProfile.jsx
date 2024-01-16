@@ -103,13 +103,13 @@ const UserProfile = () => {
           </Link>
         )}
 
-        {MyData && (
+        (
           <Link to={`/${getUserSelectedData}/Video`}>
             <button className="center">
               Start Video Chat with {userData.name}
             </button>
           </Link>
-        )}
+        )
 
         {/* {tokenconnectionId !== getUserSelectedData && if (!MyData)  (
           <Link to={`/${getUserSelectedData}/chat`}>
