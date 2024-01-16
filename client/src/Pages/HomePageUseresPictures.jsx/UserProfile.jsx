@@ -9,9 +9,7 @@ import { useGlobalSearchPage } from '../../context/SearchPageContext';
 
 import { apiService } from '../../api/apiService'; // Import your exported apiService
 import Spinner from '../../utils/Spinner';
-// import Video from '../VideoCall/Video'
 
-import Video from '../Video/Video'
 const UserProfile = () => {
   console.log('hi');
   const location = useLocation();
