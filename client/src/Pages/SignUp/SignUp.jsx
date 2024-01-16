@@ -34,7 +34,6 @@ const handleSignUp = async () => {
 
     return;
   }
-  ggggg
 
   if (!isPasswordValid()) {
     setPasswordError(
