@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
 
+const appID1 = JSON.parse(import.meta.env.VITE_APP_APP_ID);
+const serverSecret1 = import.meta.env.VITE_APP_SERVER_SECRET;
 
 
 function randomID(len) {
@@ -25,8 +27,6 @@ export function getUrlParams(
 
 export default function App() {
   
-const appID1 = JSON.parse(import.meta.env.VITE_APP_APP_ID);
-const serverSecret1 = import.meta.env.VITE_APP_SERVER_SECRET;
 
       const roomID = getUrlParams().get('roomID') || randomID(5);
       let myMeeting = async (element) => {
