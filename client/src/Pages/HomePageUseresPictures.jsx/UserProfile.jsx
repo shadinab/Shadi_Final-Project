@@ -9,7 +9,6 @@ import { useGlobalSearchPage } from '../../context/SearchPageContext';
 
 import { apiService } from '../../api/apiService'; // Import your exported apiService
 import Spinner from '../../utils/Spinner';
-import Video from '../Video/Video'
 // import Video from '../VideoCall/Video'
 
 const UserProfile = () => {
