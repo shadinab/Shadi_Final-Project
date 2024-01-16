@@ -1,5 +1,5 @@
-import ImageStory from "../Story/ImageStory"
-import UserGrid from "../HomePageUseresPictures.jsx/UserGrid"
+import ImageStory from '../Story/ImageStory';
+import UserGrid from '../HomePageUseresPictures.jsx/UserGrid';
 const HomePage = () => {
   return (
     <div>
@@ -7,5 +7,5 @@ const HomePage = () => {
       <UserGrid />
     </div>
   );
-}
-export default HomePage
+};
+export default HomePage;

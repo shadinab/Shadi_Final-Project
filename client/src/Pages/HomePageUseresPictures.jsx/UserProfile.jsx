@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom';
 import { useGlobalSearchPage } from '../../context/SearchPageContext';
 
 import { apiService } from '../../api/apiService'; // Import your exported apiService
-  import Spinner from '../../utils/Spinner';
+import Spinner from '../../utils/Spinner';
+import Video from '../Video/video'
+// import Video from '../VideoCall/Video'
 
 const UserProfile = () => {
   console.log('hi');
@@ -34,12 +36,9 @@ const UserProfile = () => {
     try {
       if (pathname.includes('/search/')) {
         // If 'id' is available, fetch data by ID
-        const response = await apiService.get(
-          `/usersById/${id}`
-        );
+        const response = await apiService.get(`/usersById/${id}`);
         console.log('User by ID Response:', response.data);
         setUserData(response.data.data);
-
       } else if (getUserSelectedData) {
         // If 'getUserSelectedData' is available, fetch data using it
         const response = await apiService.get(`/users/${getUserSelectedData}`);
@@ -73,24 +72,24 @@ const UserProfile = () => {
   //   }
   // };
 
-  
-
   useEffect(() => {
     fetchUserData();
   }, [id, getUserSelectedData]); // Add
 
-
   if (!userData) {
     // Show a loading indicator or message while data is being fetched
-   return (
-     <div className="spinner-container1">
-       <Spinner loading={loading} />
-     </div>
-   );  }
+    return (
+      <div className="spinner-container1">
+        <Spinner loading={loading} />
+      </div>
+    );
+  }
 
   return (
     <div className="user-profile">
       <div className="profile-background">
+        {/* <Video /> */}
+
         <img
           src={userData.background}
           alt="Profile Background"
@@ -104,6 +103,15 @@ const UserProfile = () => {
             </button>
           </Link>
         )}
+
+        {MyData && (
+          <Link to={`/${getUserSelectedData}/video`}>
+            <button className="center">
+              Start Video Chat with {userData.name}
+            </button>
+          </Link>
+        )}
+
         {/* {tokenconnectionId !== getUserSelectedData && if (!MyData)  (
           <Link to={`/${getUserSelectedData}/chat`}>
             <button className="center">
