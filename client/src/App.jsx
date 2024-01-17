@@ -10,12 +10,11 @@ import UserProfile from './Pages/HomePageUseresPictures.jsx/UserProfile';
 import InterestsPage from './Pages/InterestsPage/InterestsPage';
 import CreateAccount from './Pages/CreateAccount/CreateAccount';
 import { SearchPageProvider } from './context/SearchPageContext';
-import AcoountDetails from '../src/Pages/CreateAccount/AcoountDetails';
-import Chat from '../src/Pages/Chat/Chat';
+import AcoountDetails from './Pages/CreateAccount/AcoountDetails';
+import Chat from './Pages/Chat/Chat';
 import { ToastContainer } from 'react-toastify';
-import LogOut from '../src/Pages/LogOut/LogOut';
-import Video from '../src/Pages/Video/Video'
-
+import LogOut from './Pages/LogOut/LogOut';
+import Video from './Pages/Video/Video'
 
 
 
