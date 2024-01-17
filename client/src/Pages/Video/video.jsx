@@ -22,7 +22,7 @@ export function getUrlParams(url = window.location.href) {
   return new URLSearchParams(urlStr);
 }
 
-export default function App() {
+export default function Video() {
   const roomID = getUrlParams().get('roomID') || randomID(5);
   let myMeeting = async (element) => {
     // generate Kit Token
