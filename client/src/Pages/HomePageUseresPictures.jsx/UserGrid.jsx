@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 // import axios from 'axios';
 import './UserGrid.css';
 import { apiService } from '../../api/apiService'; // Import your exported apiService
-import Spinner from '../../utils/Spinner';
+// import Spinner from '../../utils/Spinner';
 
 const UserGrid = () => {
   const [users, setUsers] = useState([]);
   const [imagesPerRow, setImagesPerRow] = useState(5);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
    
   useEffect(() => {
@@ -19,7 +19,7 @@ const UserGrid = () => {
           '/users'
         );
         setUsers(response.data.data);
-           setLoading(false);
+          //  setLoading(false);
       } catch (error) {
         console.error('Error fetching user data:', error.message);
       }
@@ -56,9 +56,9 @@ const UserGrid = () => {
 
 
   return (
-    <div className="center-container">
-      <Spinner className="center10" loading={loading} />
       <div className="user-grid">
+        {/* <Spinner loading={loading} /> */}
+
         {users.map((user) => (
           <div className="user-item" key={user._id}>
             <button
@@ -78,11 +78,44 @@ const UserGrid = () => {
           </div>
         ))}
       </div>
-    </div>
   );
 };
 
+
+
+
+
 export default UserGrid;
+
+
+
+//   return (
+//     <>
+//       <Spinner className="center10" loading={loading} />
+//       <div className="user-grid">
+//         {users.map((user) => (
+//           <div className="user-item" key={user._id}>
+//             <button
+//               className="makeitinsideimage"
+//               onClick={() => getUserInformations(user)}
+//             >
+//               <Link key={user.connectionId} to={`/${user.connectionId}`}>
+//                 <img
+//                   src={user.avatar}
+//                   alt={user.name}
+//                   className="user-picture"
+//                 />
+//                 <div className="font">{user.name}</div>
+//                 <div className="font">{user.preferences.ageRange}</div>
+//               </Link>
+//             </button>
+//           </div>
+//         ))}
+//       </div>
+//     </>
+//   );
+// };
+
               {
                 /* <div className="font">{formatBirthday(user)}</div>{' '} */
               }

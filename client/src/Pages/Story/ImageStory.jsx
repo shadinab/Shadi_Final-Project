@@ -2,27 +2,32 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ImageStory.css';
 import EnlargedImageView from './EnlargedImageView'; // Import the new component
+import Spinner from '../../utils/Spinner';
 
 
 
 const ImageStory = () => {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchImages = async () => {
       // try {
       //   const response = await axios.get('http://localhost:5000/avatars');
       //   setImages(response.data); // Assuming your API returns an array of image URLs
-      // } 
-        try {
-          const response = await axios.get(
-            'https://shadi-dating-app.onrender.com/avatars'
-          );
-          setImages(response.data); // Assuming your API returns an array of image URLs
-        } catch (error) {
-          console.error('Error fetching images:', error);
-        }
+      // }
+      try {
+        const response = await axios.get(
+          'https://shadi-dating-app.onrender.com/avatars'
+        );
+        setImages(response.data);
+         setLoading(false);
+
+        // Assuming your API returns an array of image URLs
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      }
     };
 
     fetchImages();
@@ -49,6 +54,7 @@ const ImageStory = () => {
           onClose={() => setSelectedImage(null)}
         />
       )}
+      <Spinner loading={loading} />
     </div>
   );
 };

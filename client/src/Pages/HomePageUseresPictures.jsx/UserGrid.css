@@ -1,7 +1,6 @@
-body{
+body {
   background-color: #ffffff;
-    font-family: 'Roboto', sans-serif;
-
+  font-family: 'Roboto', sans-serif;
 }
 
 .user-grid {
@@ -9,21 +8,19 @@ body{
   display: flex;
   flex-wrap: wrap;
   justify-content: center; */
-    margin-top: 5rem;
+  margin-top: 5rem;
   display: grid;
   grid-template-columns: repeat(3, 15rem);
   gap: 1rem; /* Adjust the gap as needed */
   justify-content: center;
-  
 }
 
 .user-item {
   margin: 10px;
 }
 
-a{
-    text-decoration: none;
-
+a {
+  text-decoration: none;
 }
 .user-picture {
   width: 190px;
@@ -38,25 +35,22 @@ a{
   transform: scale(1.1);
 }
 
-.makeitinsideimage
-{
- background: transparent;
- border-radius: 5%;
-   text-decoration: none;
-
+.makeitinsideimage {
+  background: transparent;
+  border-radius: 5%;
+  text-decoration: none;
 }
 
-.makeitinsideimage:hover{
+.makeitinsideimage:hover {
   background: rgb(161, 158, 158);
-  
 }
+
+
 
 .center-container {
   display: flex;
   flex-direction: column;
 }
-
-
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -64,26 +58,24 @@ a{
     width: 120px;
     height: 120px;
   }
-  .user-grid{
+  .user-grid {
     margin-top: 5rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
-
-
 
 @media (max-width: 480px) {
   .user-picture {
     width: 100px;
     height: 100px;
   }
-   .user-grid{
+  .user-grid {
     margin-top: 5rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
