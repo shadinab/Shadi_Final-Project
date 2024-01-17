@@ -56,23 +56,28 @@ const UserGrid = () => {
 
 
   return (
-    <div className="user-grid">
-      <Spinner loading={loading} />
-
-      {users.map((user) => (
-        <div className="user-item" key={user._id}>
-          <button
-            className="makeitinsideimage"
-            onClick={() => getUserInformations(user)}
-          >
-            <Link key={user.connectionId} to={`/${user.connectionId}`}>
-              <img src={user.avatar} alt={user.name} className="user-picture" />
-              <div className="font">{user.name}</div>
-              <div className="font">{user.preferences.ageRange}</div>
-            </Link>
-          </button>
-        </div>
-      ))}
+    <div className="center-container">
+      <Spinner className="center10" loading={loading} />
+      <div className="user-grid">
+        {users.map((user) => (
+          <div className="user-item" key={user._id}>
+            <button
+              className="makeitinsideimage"
+              onClick={() => getUserInformations(user)}
+            >
+              <Link key={user.connectionId} to={`/${user.connectionId}`}>
+                <img
+                  src={user.avatar}
+                  alt={user.name}
+                  className="user-picture"
+                />
+                <div className="font">{user.name}</div>
+                <div className="font">{user.preferences.ageRange}</div>
+              </Link>
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
