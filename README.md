@@ -73,13 +73,13 @@ Visit http://localhost:5137 to access the application.
 Screenshots
 Include screenshots of the application to provide a visual representation of the features and user interface.
 
-Profile Page:
+Profile Page:  ![Profile Page Example](https://example.com/profile-page.png)
 
-Chat Interface:
+Chat Interface: ![Profile Page Example](https://example.com/profile-page.png)
 
-Search Functionality:
+Search Functionality: ![Profile Page Example](https://example.com/profile-page.png)
 
-Video Call:
+Video Call: ![Profile Page Example](https://example.com/profile-page.png)
 
 Support and Issues
 For any issues or assistance, please feel free to open an issue on our GitHub repository.
