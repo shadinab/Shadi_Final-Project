@@ -59,6 +59,10 @@
 margin-top: 1rem;
   }
 
+  .center3{
+    text-align: center;
+    width: 30vw;
+  }
 
 .user-description {
   color: #666;
@@ -144,6 +148,11 @@ margin-top: 1rem;
   .center{
  margin-bottom: 2rem;
  margin-left: 2rem;
+  }
+
+  .center3{
+    text-align: center;
+    width: 60vw;
   }
   
 }

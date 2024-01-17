@@ -76,6 +76,11 @@ img {
 }
 
 
+  .center4{
+    text-align: center;
+    width: 30vw;
+  }
+
 .profile1{
   height: 20vh;
   margin-bottom: 2rem;
@@ -100,4 +105,8 @@ img {
   color: #333333; /* Adjust the color as needed */
   /* Add more styles as needed */
 }
+.center4{
+    text-align: center;
+    width: 60vw;
+  }
 }

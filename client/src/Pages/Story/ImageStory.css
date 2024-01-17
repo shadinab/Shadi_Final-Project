@@ -6,6 +6,7 @@
   padding: 10px;
   justify-content: center; /* Center the flex items horizontally */
   overflow: hidden;
+  margin-top: 2rem;
 }
 
 .story-image {
@@ -16,9 +17,51 @@
   border-radius: 50%;
 }
 
-/* Responsive styles */
+
+@media screen and (max-width: 768px) {
+  .image-story {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    gap: 5px; /* Adjust the gap as needed */
+    padding: 5px;
+    width: 100%;
+    overflow-x: auto;
+    gap: 1rem;
+  }
+
+  .story-image {
+    width: 65px;
+    height: 65px;
+    margin-right: 5px;
+  }
+  
+  /* Adjustments for smaller screens */
+  .image-story {
+    margin-top: 1rem;
+  }
+  
+}
 
 @media screen and (max-width: 480px) {
+  .image-story {
+    padding: 5px;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .story-image {
+    width: 50px;
+    height: 50px;
+    margin-right: 3px;
+  }
+}
+
+/* Responsive styles */
+
+/* @media screen and (max-width: 480px) {
   .image-story {
     padding: 5px;
     width:100vw;
@@ -28,8 +71,10 @@
 
   .story-image {
     width: 65px;
-    height: 65px;
+    height:65px;
     margin-right: 5px;
   }
   
-}
+} */
+
+

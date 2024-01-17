@@ -119,7 +119,7 @@ const MyProfile = () => {
         ) : (
           <>
             <h2>{MyData.name}</h2>
-            <div className="user-description">{MyData.description}</div>
+            <div className="user-description center4">{MyData.description}</div>
             {/* <div className="user-description">
               {MyData.preferences.ageRange}
             </div> */}
@@ -134,7 +134,7 @@ const MyProfile = () => {
             </div>
             <div>
               <h2>My interest</h2>
-              <div className="user-description">
+              <div className="user-description center4">
                 {MyData.interests.join(', ')}
               </div>
             </div>

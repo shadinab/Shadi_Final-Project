@@ -122,14 +122,11 @@ const UserProfile = () => {
         />
         <div>
           <h2>{userData.name}</h2>
-          <div className="user-description">{userData.description}</div>
-           {/* <div className="user-description">
-              {MyData.preferences.ageRange}
-            </div> */}
+          <div className="user-description center3"  >{userData.description}</div>
         </div>
         <div>
           <h2>My interest</h2>
-          <div className="user-description">
+          <div className="user-description center3">
             {userData.interests.join(', ')}
           </div>
         </div>

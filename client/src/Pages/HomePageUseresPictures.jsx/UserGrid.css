@@ -5,9 +5,14 @@ body{
 }
 
 .user-grid {
-  margin-top: 5rem;
+  /* margin-top: 5rem;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center; */
+    margin-top: 5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 15rem);
+  gap: 1rem; /* Adjust the gap as needed */
   justify-content: center;
   
 }
@@ -52,6 +57,12 @@ a{
     width: 120px;
     height: 120px;
   }
+  .user-grid{
+    margin-top: 5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  }
 }
 
 
@@ -60,6 +71,12 @@ a{
   .user-picture {
     width: 100px;
     height: 100px;
+  }
+   .user-grid{
+    margin-top: 5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   }
 }
 
