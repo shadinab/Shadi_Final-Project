@@ -14,7 +14,7 @@ import AcoountDetails from './Pages/CreateAccount/AcoountDetails';
 import Chat from './Pages/Chat/Chat';
 import { ToastContainer } from 'react-toastify';
 import LogOut from './Pages/LogOut/LogOut';
-import Video from './Pages/Video/Video';
+import Video from './Pages/Video/Video.jsx';
 
 function App() {
   return (
