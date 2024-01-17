@@ -94,15 +94,15 @@ const UserProfile = () => {
         {/* tokenconnectionId !== getUserSelectedData && */}
         {MyData && (
           <Link to={`/${getUserSelectedData}/chat`}>
-            <button className="center">
-              Send a Message To {userData.name}
+            <button className="center color1">
+             Click Me to Start The Chat
             </button>
           </Link>
         )}
         {MyData && (
           <Link to={`/${getUserSelectedData}/Video`}>
-            <button className="center">
-             Video Call 
+            <button className="center color2">
+           Start A Video Call 
             </button>
           </Link>
         )}
