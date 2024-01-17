@@ -1,6 +1,5 @@
 # Dating App ReadMe
 
-View Live Demo
 Check out the live demo on Netlify.
 
 ## Project Overview
