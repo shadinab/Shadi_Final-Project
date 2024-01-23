@@ -13,19 +13,21 @@ const ImageStory = () => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      // try {
-      //   const response = await axios.get('http://localhost:5000/avatars');
-      //   setImages(response.data); // Assuming your API returns an array of image URLs
-      // }
+      if (window.innerWidth < 600) {
+        setLoading(false);
+      }
+    
       try {
         const response = await axios.get(
           'https://shadi-dating-app.onrender.com/avatars'
         );
         setImages(response.data);
          setLoading(false);
+          
 
         // Assuming your API returns an array of image URLs
       } catch (error) {
+        
         console.error('Error fetching images:', error);
       }
     };
